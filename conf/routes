@@ -3,13 +3,25 @@
 # ~~~~
 
 # Home page
-GET         /                    @controllers.Application.index()
+GET           /                                  @controllers.Application.index()
 
 #Admin panel
 
-POST        /adminpanel          @controllers.AppUsers.loginRender()
-GET         /adminpanel          @controllers.AppUsers.panelRender()
-GET         /logout              @controllers.AppUsers.logout()
+POST          /adminpanel                        @controllers.AppUsers.loginRender()
+GET           /adminpanel                        @controllers.AppUsers.panelRender()
+GET           /logout                            @controllers.AppUsers.logout()
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
+GET           /assets/*file                      @controllers.Assets.versioned(path="/public", file: Asset)
+
+
+#Staff
+
+GET           /osoblje                           @controllers.Persons.staffRender()
+GET           /osoblje/dodajosobu                @controllers.Persons.createPersonRender()
+POST          /osoblje/dodajosobu                @controllers.Persons.createPerson()
+GET           /osoblje/listaosoba                @controllers.Persons.listOfPersons()
+GET           /osoblje/:personId                 @controllers.Persons.updatePersonRender(personId: Integer)
+POST          /osoblje/:personId                 @controllers.Persons.updatePerson(personId: Integer)
+GET           /osoblje/brisanje/:personId        @controllers.Persons.deletePerson(personId: Integer)
+DELETE        /osoblje/brisanje/:personId        @controllers.Persons.deletePerson(personId: Integer)

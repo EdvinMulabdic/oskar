@@ -1,0 +1,77 @@
+@(person: Person)
+@main{
+    <div id="content" class="span10">
+
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-dashboard"></i>
+                <a href="@routes.AppUsers.panelRender()">Dashboard</a>
+                <i class="icon-angle-right"></i>
+                <a href="@routes.Persons.staffRender()">Osoblje</a>
+                <i class="icon-angle-right"></i>
+                <a href="@routes.Persons.listOfPersons()">Lista osoblja</a>
+                <i class="icon-angle-right"></i>
+                <a>Uredi osobu</a>
+            </li>
+        </ul>
+
+        <div class="box-content">
+            <form method="POST" class="form-horizontal" role="form" action="@routes.Persons.updatePerson(person.id)">
+                <fieldset>
+
+                    <div class="control-group">
+                        <label class="control-label" for="name">Ime</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="name" name="name" type="text" value="@person.name">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="lastname">Prezime</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="lastname" name="lastname" type="text" value="@person.lastName">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="company">Firma</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="company" name="company" type="text" value="@person.company">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="phone">Telefon</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="phone" name="phone" type="text" value="@person.phone">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="email">Email</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="email" name="email" type="email" value="@person.mail">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="cerifikati">Certifikati </label>
+                        <div class="controls">
+                            <select id="certifikati" multiple data-rel="chosen">
+                                <option>Certifikat 1</option>
+                                <option selected>Certifikat 2</option>
+                                <option>Certifikat 3</option>
+                                <option>Certifikat 4</option>
+                                <option>Certifikat 5</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Azuriraj</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+
+}

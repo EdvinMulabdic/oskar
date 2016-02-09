@@ -1,0 +1,29 @@
+@main{
+    <div id="content" class="span10">
+
+
+        <ul class="breadcrumb">
+            <li>
+               <i class="icon-dashboard"></i>
+                <a href="@routes.AppUsers.panelRender()">Dashboard</a>
+                <i class="icon-angle-right"></i>
+                <a>Osoblje</a>
+            </li>
+        </ul>
+
+        <div class="row-fluid">
+            <a class="quick-button metro greenLight span2" href="@routes.Persons.createPerson()">
+                <i class="icon-plus"></i>
+                <p>Dodaj osobu</p>
+            </a>
+
+            <a class="quick-button metro blue span2" href="@routes.Persons.listOfPersons()">
+                <i class="icon-list"></i>
+                <p>Lista osoblja</p>
+            </a>
+
+
+        </div>
+
+    </div>
+}
