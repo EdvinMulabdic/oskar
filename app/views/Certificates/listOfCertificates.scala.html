@@ -1,0 +1,66 @@
+@(certificates: java.util.List[Certificate])
+@main{
+    <div id="content" class="span10">
+
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-dashboard"></i>
+                <a href="@routes.AppUsers.panelRender()">Dashboard</a>
+                <i class="icon-angle-right"></i>
+                <a href="@routes.Certificates.certificateMainRender()">Certifikati</a>
+                <i class="icon-angle-right"></i>
+                <a>Lista certifikata</a>
+            </li>
+        </ul>
+
+
+        <div class="row-fluid sortable">
+            <div class="box span12">
+                <div class="box-header" data-original-title>
+                    <h2><i class="halflings-icon white user"></i><span class="break"></span>Lista certifikata</h2>
+
+                </div>
+                <div class="box-content">
+                    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Oznaka</th>
+                                <th>Ime</th>
+                                <th>Trajanje</th>
+                                <th>Kategorija</th>
+                                <th>Uredi</th>
+                                <th>Obrisi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @if(certificates!= null){
+                            @for(certificate <- certificates){
+                                <tr>
+                                    <td>@certificate.id</td>
+                                    <td>@certificate.mark</td>
+                                    <td class="center">@certificate.name</td>
+                                    <td class="center">@certificate.duration</td>
+                                    <td class="center">@certificate.category </td>
+                                    <td class="center">
+                                        <a class="btn btn-info" href="">
+                                            <i class="halflings-icon white edit"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-danger" href="">
+                                            <i class="halflings-icon white trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--/span-->
+        </div><!--/row-->
+    </div>
+
+}

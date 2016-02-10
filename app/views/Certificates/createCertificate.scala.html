@@ -1,0 +1,65 @@
+@main {
+    <div id="content" class="span10">
+
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-dashboard"></i>
+                <a href="@routes.AppUsers.panelRender()">Dashboard</a>
+                <i class="icon-angle-right"></i>
+                <a href="@routes.Certificates.certificateMainRender()">Certifikati</a>
+                <i class="icon-angle-right"></i>
+                <a>Dodaj certifikat</a>
+            </li>
+        </ul>
+
+
+
+        <div class="box-content">
+            <form method="POST" class="form-horizontal" role="form" action="@routes.Certificates.createCertificate()">
+                <fieldset>
+
+                    <div class="control-group">
+                        <label class="control-label" for="mark">Oznaka</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="mark" name="mark" type="text" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="name">Ime</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="name" name="name" type="text" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="duration">Trajanje </label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="duration" name="duration" type="number" value="3" min="0" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="category">Kategorija</label>
+                        <div class="controls">
+                            <select id="category" data-rel="chosen" name="category" required>
+                                <option>EOQ MENADZER KVALITETE</option>
+                                <option>EOQ PROCESS MENADZER</option>
+                                <option>EOQ RISK MENADZER</option>
+                                <option>EOQ MENADZER OKOLISA</option>
+                                <option>EOQ MENADZER ZASTITE NA RADU</option>
+                                <option>EOQ MENADZER ISPRAVNOSTI HRANE</option>
+                                <option>INTERNI AUDITOR (seminar)</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Dodaj</button>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+}

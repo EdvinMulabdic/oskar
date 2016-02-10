@@ -21,20 +21,20 @@ public class Person extends Model {
     public String phone;
     public String mail;
 
-    @OneToMany
-    Certificate certificate;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "persons")
+    public List<Certificate> certificates;
 
     public Person(){
 
     }
 
-    public Person(String name, String lastName, String company, String phone, String mail, Certificate certificate) {
+    public Person(String name, String lastName, String company, String phone, String mail, List<Certificate> certificates) {
         this.name = name;
         this.lastName = lastName;
         this.company = company;
         this.phone = phone;
         this.mail = mail;
-        this.certificate = certificate;
+        this.certificates = certificates;
     }
 
         /* ------------------- save person ------------------ */

@@ -1,75 +1,79 @@
+@(certificates: java.util.List[Certificate])
 @main {
-  <div id="content" class="span10">
+    <div id="content" class="span10">
 
 
-    <ul class="breadcrumb">
-      <li>
-        <i class="icon-dashboard"></i>
-        <a href="@routes.AppUsers.panelRender()">Dashboard</a>
-        <i class="icon-angle-right"></i>
-        <a href="@routes.Persons.staffRender()">Osoblje</a>
-        <i class="icon-angle-right"></i>
-        <a>Dodaj osobu</a>
-      </li>
-    </ul>
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-dashboard"></i>
+                <a href="@routes.AppUsers.panelRender()">Dashboard</a>
+                <i class="icon-angle-right"></i>
+                <a href="@routes.Persons.staffRender()">Osoblje</a>
+                <i class="icon-angle-right"></i>
+                <a>Dodaj osobu</a>
+            </li>
+        </ul>
 
 
 
-    <div class="box-content">
-      <form method="POST" class="form-horizontal" role="form" action="">
-        <fieldset>
+        <div class="box-content">
+            <form method="POST" class="form-horizontal" role="form" action="@routes.Persons.createPerson()">
+                <fieldset>
 
-          <div class="control-group">
-            <label class="control-label" for="name">Ime</label>
-            <div class="controls">
-              <input class="input-xlarge focused" id="name" name="name" type="text">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="lastname">Prezime</label>
-            <div class="controls">
-              <input class="input-xlarge focused" id="lastname" name="lastname" type="text">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="company">Firma</label>
-            <div class="controls">
-              <input class="input-xlarge focused" id="company" name="company" type="text">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="phone">Telefon</label>
-            <div class="controls">
-              <input class="input-xlarge focused" id="phone" name="phone" type="text">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="email">Email</label>
-            <div class="controls">
-              <input class="input-xlarge focused" id="email" name="email" type="email">
-            </div>
-          </div>
+                    <div class="control-group">
+                        <label class="control-label" for="name">Ime</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="name" name="name" type="text">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="lastname">Prezime</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="lastname" name="lastname" type="text">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="company">Firma</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="company" name="company" type="text">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="phone">Telefon</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="phone" name="phone" type="text">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="email">Email</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="email" name="email" type="email">
+                        </div>
+                    </div>
 
-          <div class="control-group">
-            <label class="control-label" for="cerifikati">Certifikati </label>
-            <div class="controls">
-              <select id="certifikati" multiple data-rel="chosen">
-                <option>Certifikat 1</option>
-                <option selected>Certifikat 2</option>
-                <option>Certifikat 3</option>
-                <option>Certifikat 4</option>
-                <option>Certifikat 5</option>
-              </select>
-            </div>
-          </div>
+                    <div class="control-group">
+                        <label class="control-label" for="cerifikati">Certifikati </label>
+                        <div class="controls">
+                            <select id="certifikati" multiple data-rel="chosen" name="certificates" >
+                                @for(certificate <- certificates){
+                                    <option value="@certificate.id" name="@certificate.id">@certificate.name</option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
 
 
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Dodaj</button>
-          </div>
-        </fieldset>
-      </form>
+                    <div class="form-actions">
+                        <button  type="submit" class="btn btn-primary">Dodaj</button>
+                    </div>
+                </fieldset>
+            </form>
 
+            <input id="certificateId" name="certificateId" hidden>
+
+        </div>
     </div>
-  </div>
+
+
 }

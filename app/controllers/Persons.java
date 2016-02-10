@@ -3,17 +3,20 @@ package controllers;
 import models.Certificate;
 import models.Company;
 import models.Person;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by User on 2/9/2016.
  */
 public class Persons extends Controller {
+
 
             /* ------------------- staff render view ------------------ */
 
@@ -24,18 +27,23 @@ public class Persons extends Controller {
             /* ------------------- create person view render ------------------ */
 
     public Result createPersonRender(){
-        return ok(views.html.Persons.createPerson.render());
+        List<Certificate> certificates = Certificate.getAllCertificates();
+        return ok(views.html.Persons.createPerson.render(certificates));
     }
 
             /* ------------------- create person ------------------ */
 
     public Result createPerson(){
+        List<Certificate> certificatesList = Certificate.getAllCertificates();
+
         DynamicForm form = Form.form().bindFromRequest();
         String name = form.field("name").value();
         String lastname = form.field("lastname").value();
         String company = form.field("company").value();
         String phone = form.field("phone").value();
         String email = form.field("email").value();
+
+
 
         Person.savePerson(name, lastname, company, phone, email);
 
