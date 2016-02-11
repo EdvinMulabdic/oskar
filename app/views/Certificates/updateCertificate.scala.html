@@ -1,3 +1,4 @@
+@(certificate: Certificate)
 @main {
     <div id="content" class="span10">
 
@@ -9,38 +10,41 @@
                 <i class="icon-angle-right"></i>
                 <a href="@routes.Certificates.certificateMain()">Certifikati</a>
                 <i class="icon-angle-right"></i>
-                <a>Dodaj certifikat</a>
+                <a href="@routes.Certificates.listOfCertificates()">Lista certifikata</a>
+                <i class="icon-angle-right"></i>
+                <a>Uredi certifikat</a>
             </li>
         </ul>
 
 
 
         <div class="box-content">
-            <form method="POST" class="form-horizontal" role="form" action="@routes.Certificates.createCertificate()">
+            <form method="POST" class="form-horizontal" role="form" action="@routes.Certificates.updateCertificate(certificate.id)">
                 <fieldset>
 
                     <div class="control-group">
                         <label class="control-label" for="mark">Oznaka</label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="mark" name="mark" type="text" required>
+                            <input class="input-xlarge focused" id="mark" name="mark" type="text" value="@certificate.mark" required>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="name">Ime</label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="name" name="name" type="text" required>
+                            <input class="input-xlarge focused" id="name" name="name" type="text" value="@certificate.name" required>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="duration">Trajanje </label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="duration" name="duration" type="number" value="3" min="0" required>
+                            <input class="input-xlarge focused" id="duration" name="duration" type="number" value="@certificate.duration" min="0" required>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="category">Kategorija</label>
                         <div class="controls">
                             <select id="category" data-rel="chosen" name="category" required>
+                                <option selected>@certificate.category</option>
                                 <option>EOQ MENADZER KVALITETE</option>
                                 <option>EOQ PROCESS MENADZER</option>
                                 <option>EOQ RISK MENADZER</option>
@@ -55,7 +59,7 @@
 
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Dodaj</button>
+                        <button type="submit" class="btn btn-primary">Azuriraj</button>
                     </div>
                 </fieldset>
             </form>

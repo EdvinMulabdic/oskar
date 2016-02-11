@@ -8,7 +8,7 @@
                 <i class="icon-dashboard"></i>
                 <a href="@routes.AppUsers.panelRender()">Dashboard</a>
                 <i class="icon-angle-right"></i>
-                <a href="@routes.Persons.staffRender()">Osoblje</a>
+                <a href="@routes.Persons.personsMain()">Osoblje</a>
                 <i class="icon-angle-right"></i>
                 <a>Dodaj osobu</a>
             </li>
@@ -54,26 +54,38 @@
                     <div class="control-group">
                         <label class="control-label" for="cerifikati">Certifikati </label>
                         <div class="controls">
-                            <select id="certifikati" multiple data-rel="chosen" name="certificates" >
+                            <select id="multiple" multiple data-rel="chosen" name="certificates">
                                 @for(certificate <- certificates){
-                                    <option value="@certificate.id" name="@certificate.id">@certificate.name</option>
+                                    <option  value="@certificate.id" name="@certificate.id">@certificate.name</option>
                                 }
 
                             </select>
                         </div>
                     </div>
 
-
                     <div class="form-actions">
-                        <button  type="submit" class="btn btn-primary">Dodaj</button>
+                        <button  onclick="displayVals()" type="submit" class="btn btn-primary">Dodaj</button>
                     </div>
                 </fieldset>
+
+                <input id="certificateId" name="certificateId" style="display: none">
+
             </form>
 
-            <input id="certificateId" name="certificateId" hidden>
 
         </div>
     </div>
 
+    <script src='@routes.Assets.versioned("javascripts/pokusaj.js")'></script>
+<script>
+function displayVals() {
+var multipleValues = $("#multiple").val() || [];
+  $("#certificateId").val(multipleValues.join( "," ));
+  console.log(multipleValues)
+}
+
+$( "select" ).change( displayVals );
+
+</script>
 
 }

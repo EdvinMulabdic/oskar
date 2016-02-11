@@ -33,6 +33,8 @@ public class Certificate extends Model {
         this.category = category;
         this.persons = persons;
     }
+            /* ------------------- create certificate ------------------ */
+
 
     public static void createCertificate(String mark, String name, String duration, String category){
 
@@ -45,11 +47,48 @@ public class Certificate extends Model {
         certificate.save();
     }
 
-    /* ------------------- get all certificates ------------------ */
+            /* ------------------- update certificate ------------------ */
+
+    public static void updateCertificate(String mark, String name, String duration, String category, Integer certificateId){
+
+        Certificate certificate = findCertificateById(certificateId);
+        certificate.mark = mark;
+        certificate.name = name;
+        certificate.category = category;
+        certificate.duration = duration;
+
+        certificate.update();
+
+    }
+
+             /* ------------------- delete certificate ------------------ */
+
+    public static void deleteCertificate(Integer certificateId){
+        Certificate certificate = findCertificateById(certificateId);
+        certificate.delete();
+    }
+
+
+             /* ------------------- get all certificates ------------------ */
 
     public static List<Certificate> getAllCertificates(){
         Model.Finder<String, Certificate> finder = new Model.Finder<>(Certificate.class);
         List<Certificate> certificates = finder.all();
         return certificates;
     }
+
+             /* ------------------- get number of certificates in database ------------------ */
+
+    public static Integer getAllCertificatesSize(){
+        Integer numberOfCertificates= finder.all().size();
+        return numberOfCertificates;
+    }
+
+            /* ------------------- finds certificate by id ------------------ */
+
+    public static Certificate findCertificateById (Integer certificateId){
+        Certificate certificate = finder.where().eq("id", certificateId).findUnique();
+        return certificate;
+    }
+
 }

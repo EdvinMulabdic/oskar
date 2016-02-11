@@ -14,20 +14,20 @@
 
         <div class="row-fluid">
             
-            <a class="quick-button metro yellow span2" href="@routes.Persons.staffRender()">
+            <a class="quick-button metro yellow span2" href="@routes.Persons.personsMain()">
                 <i class="icon-group"></i>
                 <p>Osoblje</p>
-                <span class="badge">237</span>
+                <span class="badge">@Person.getAllPersonsSize</span>
             </a>
-            <a class="quick-button metro red span2">
+            <a class="quick-button metro red span2" href="@routes.Companies.companyMain()">
                 <i class=" icon-briefcase"></i>
                 <p>Firme</p>
-                <span class="badge">46</span>
+                <span class="badge">@Company.getAllCompaniesSize</span>
             </a>
-            <a class="quick-button metro blue span2" href="@routes.Certificates.certificateMainRender()">
+            <a class="quick-button metro blue span2" href="@routes.Certificates.certificateMain()">
                 <i class="icon-copy"></i>
                 <p>Certifikati</p>
-                <span class="badge">13</span>
+                <span class="badge">@Certificate.getAllCertificatesSize</span>
             </a>
 
 

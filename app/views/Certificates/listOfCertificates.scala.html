@@ -8,7 +8,7 @@
                 <i class="icon-dashboard"></i>
                 <a href="@routes.AppUsers.panelRender()">Dashboard</a>
                 <i class="icon-angle-right"></i>
-                <a href="@routes.Certificates.certificateMainRender()">Certifikati</a>
+                <a href="@routes.Certificates.certificateMain()">Certifikati</a>
                 <i class="icon-angle-right"></i>
                 <a>Lista certifikata</a>
             </li>
@@ -44,12 +44,12 @@
                                     <td class="center">@certificate.duration</td>
                                     <td class="center">@certificate.category </td>
                                     <td class="center">
-                                        <a class="btn btn-info" href="">
+                                        <a class="btn btn-info" href="@routes.Certificates.updateCertificateRender(certificate.id)">
                                             <i class="halflings-icon white edit"></i>
                                         </a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-danger" href="">
+                                        <a class="btn btn-danger" href="@routes.Certificates.deleteCertificate(certificate.id)">
                                             <i class="halflings-icon white trash"></i>
                                         </a>
                                     </td>

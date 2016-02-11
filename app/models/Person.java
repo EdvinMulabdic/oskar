@@ -40,7 +40,7 @@ public class Person extends Model {
         /* ------------------- save person ------------------ */
 
 
-    public static void savePerson(String name, String lastName, String company, String phone, String mail){
+    public static void savePerson(String name, String lastName, String company, String phone, String mail, List<Certificate> certificates){
 
         Person person = new Person();
         person.name = name;
@@ -48,7 +48,7 @@ public class Person extends Model {
         person.company = company;
         person.phone = phone;
         person.mail = mail;
-
+        person.certificates = certificates;
         person.save();
 
     }
@@ -82,6 +82,13 @@ public class Person extends Model {
         Model.Finder<String, Person> finder = new Model.Finder<>(Person.class);
         List<Person> persons = finder.all();
         return persons;
+    }
+
+     /* ------------------- get number of persons in database ------------------ */
+
+    public static Integer getAllPersonsSize(){
+        Integer numberOfPersons = finder.all().size();
+        return numberOfPersons;
     }
 
         /* ------------------- finds person by id ------------------ */

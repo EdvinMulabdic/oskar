@@ -18,10 +18,10 @@ import java.util.List;
 public class Persons extends Controller {
 
 
-            /* ------------------- staff render view ------------------ */
+            /* ------------------- personsMain render view ------------------ */
 
-    public Result staffRender(){
-        return ok(views.html.Persons.staff.render());
+    public Result personsMain(){
+        return ok(views.html.Persons.personsMain.render());
     }
 
             /* ------------------- create person view render ------------------ */
@@ -37,17 +37,36 @@ public class Persons extends Controller {
         List<Certificate> certificatesList = Certificate.getAllCertificates();
 
         DynamicForm form = Form.form().bindFromRequest();
+
         String name = form.field("name").value();
         String lastname = form.field("lastname").value();
         String company = form.field("company").value();
         String phone = form.field("phone").value();
         String email = form.field("email").value();
 
+        String certifikat = form.field("certificateId").value();
+
+        List<String> certificates = new ArrayList<>();
+        String[] strings = (certifikat.split(","));
+        for(int i=0; i < strings.length; i++){
+            certificates.add(strings[i]);
+        }
+
+        List<Certificate>certificatesId = new ArrayList<>();
+        for (int i = 0; i < certificates.size(); i++) {
+            for (int j = 0; j < certificatesList.size(); j++) {
+                if (certificatesList.get(j).id.toString().equals(certificates.get(i))) {
+                    certificatesId.add(certificatesList.get(j));
+                }
+            }
+        }
 
 
-        Person.savePerson(name, lastname, company, phone, email);
+        Logger.info("ID   " + certificates);
 
-        return redirect(routes.Persons.staffRender());
+        Person.savePerson(name, lastname, company, phone, email, certificatesId);
+
+        return redirect(routes.Persons.personsMain());
     }
             /* ------------------- update person view render ------------------ */
 

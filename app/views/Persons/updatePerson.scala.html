@@ -8,7 +8,7 @@
                 <i class="icon-dashboard"></i>
                 <a href="@routes.AppUsers.panelRender()">Dashboard</a>
                 <i class="icon-angle-right"></i>
-                <a href="@routes.Persons.staffRender()">Osoblje</a>
+                <a href="@routes.Persons.personsMain()">Osoblje</a>
                 <i class="icon-angle-right"></i>
                 <a href="@routes.Persons.listOfPersons()">Lista osoblja</a>
                 <i class="icon-angle-right"></i>
@@ -23,13 +23,13 @@
                     <div class="control-group">
                         <label class="control-label" for="name">Ime</label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="name" name="name" type="text" value="@person.name">
+                            <input class="input-xlarge focused" id="name" name="name" type="text" value="@person.name" required>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="lastname">Prezime</label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="lastname" name="lastname" type="text" value="@person.lastName">
+                            <input class="input-xlarge focused" id="lastname" name="lastname" type="text" value="@person.lastName" required>
                         </div>
                     </div>
                     <div class="control-group">
@@ -41,13 +41,13 @@
                     <div class="control-group">
                         <label class="control-label" for="phone">Telefon</label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="phone" name="phone" type="text" value="@person.phone">
+                            <input class="input-xlarge focused" id="phone" name="phone" type="text" value="@person.phone" required>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="email">Email</label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="email" name="email" type="email" value="@person.mail">
+                            <input class="input-xlarge focused" id="email" name="email" type="email" value="@person.mail" required>
                         </div>
                     </div>
 
