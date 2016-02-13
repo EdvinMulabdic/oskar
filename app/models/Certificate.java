@@ -18,7 +18,6 @@ public class Certificate extends Model {
     public String mark;
     public String name;
     public String duration;
-    public String category;
 
     @ManyToMany
     public List<Person> persons;
@@ -26,35 +25,32 @@ public class Certificate extends Model {
     public Certificate(){
 
     }
-    public Certificate(String mark, String name, String duration,String category, List<Person> persons) {
+    public Certificate(String mark, String name, String duration, List<Person> persons) {
         this.mark = mark;
         this.name = name;
         this.duration = duration;
-        this.category = category;
         this.persons = persons;
     }
             /* ------------------- create certificate ------------------ */
 
 
-    public static void createCertificate(String mark, String name, String duration, String category){
+    public static void createCertificate(String mark, String name, String duration){
 
         Certificate certificate = new Certificate();
         certificate.mark = mark;
         certificate.name = name;
         certificate.duration = duration;
-        certificate.category = category;
 
         certificate.save();
     }
 
             /* ------------------- update certificate ------------------ */
 
-    public static void updateCertificate(String mark, String name, String duration, String category, Integer certificateId){
+    public static void updateCertificate(String mark, String name, String duration, Integer certificateId){
 
         Certificate certificate = findCertificateById(certificateId);
         certificate.mark = mark;
         certificate.name = name;
-        certificate.category = category;
         certificate.duration = duration;
 
         certificate.update();

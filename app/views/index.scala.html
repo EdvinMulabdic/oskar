@@ -33,13 +33,9 @@
 
     </head>
     <body id="background-login">
-
+<div style="float: left; margin-left: 100px">
     <div class="row-fluid">
         <div class="login-box">
-            <div class="icons">
-                <a href="index.html"><i class="halflings-icon home"></i></a>
-                <a href="#"><i class="halflings-icon cog"></i></a>
-            </div>
             <h2>Login to your account</h2>
             <form class="form-horizontal" action="@routes.AppUsers.loginRender()" method="post">
                 <fieldset>
@@ -56,8 +52,6 @@
                     </div>
                     <div class="clearfix"></div>
 
-                    <label class="remember" for="remember"><input type="checkbox" id="remember" />Remember me</label>
-
                     <div class="button-login">
                         <button type="submit" class="btn btn-primary">Login</button>
                     </div>
@@ -65,13 +59,10 @@
                 </fieldset>
             </form>
             <hr>
-            <h3>Forgot Password?</h3>
-            <p>
-                No problem, <a href="#">click here</a> to get a new password.
-            </p>
+
         </div><!--/span-->
     </div><!--/row-->
-
+</div>
     <!-- start: JavaScript-->
 
     <script src='@routes.Assets.versioned("javascripts/js/jquery-1.9.1.min.js")'></script>

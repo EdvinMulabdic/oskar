@@ -49,3 +49,7 @@ GET           /firme/:companyId                           @controllers.Companies
 POST          /firme/:companyId                           @controllers.Companies.updateCompany(companyId: Integer)
 GET           /firme/brisanje/:companyId                  @controllers.Companies.deleteCompany(companyId: Integer)
 DELETE        /firme/brisanje/:companyId                  @controllers.Companies.deleteCompany(companyId: Integer)
+
+#Email
+GET           /osoblje/mail/:personId                     @controllers.Emails.sendEmailRender(personId: Integer)
+POST          /osoblje/mail/:personId                     @controllers.Emails.sendEmail(personId: Integer)

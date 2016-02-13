@@ -1,10 +1,12 @@
 package controllers;
 
+import helpers.Authenticators;
 import models.Company;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 
 import java.util.List;
 
@@ -14,20 +16,20 @@ import java.util.List;
 public class Companies extends Controller {
 
             /* ------------------- render main companies page ------------------ */
-
+            @Security.Authenticated(Authenticators.AdminFilter.class)
     public Result companyMain(){
         return ok(views.html.Companies.companyMain.render());
     }
 
 
             /* ------------------- render create company ------------------ */
-
+            @Security.Authenticated(Authenticators.AdminFilter.class)
     public Result createCompanyRender(){
         return ok(views.html.Companies.createCompany.render());
     }
 
             /* ------------------- create company ------------------ */
-
+            @Security.Authenticated(Authenticators.AdminFilter.class)
     public Result createCompany(){
         DynamicForm form = Form.form().bindFromRequest();
 
@@ -42,14 +44,14 @@ public class Companies extends Controller {
     }
 
                 /* ------------------- list of companies ------------------ */
-
+                @Security.Authenticated(Authenticators.AdminFilter.class)
     public Result listOfCompanies(){
         List<Company> companies = Company.getAllCompanies();
         return ok(views.html.Companies.listOfCompanies.render(companies));
     }
 
                     /* ------------------- render update company ------------------ */
-
+                    @Security.Authenticated(Authenticators.AdminFilter.class)
     public Result updateCompanyRender(Integer companyId){
 
         Company company = Company.findCompanyById(companyId);
@@ -57,7 +59,7 @@ public class Companies extends Controller {
     }
 
                         /* ------------------- update company ------------------ */
-
+                        @Security.Authenticated(Authenticators.AdminFilter.class)
     public Result updateCompany(Integer companyId){
 
         DynamicForm form = Form.form().bindFromRequest();
@@ -72,7 +74,7 @@ public class Companies extends Controller {
     }
 
                 /* -------------------  delete company ------------------ */
-
+                @Security.Authenticated(Authenticators.AdminFilter.class)
     public Result deleteCompany(Integer companyId){
         Company.deleteCompany(companyId);
 

@@ -5,7 +5,7 @@
 
         <ul class="breadcrumb">
             <li>
-                <i class="icon-dashboard"></i>
+                <i class="icon-bar-chart"></i>
                 <a href="@routes.AppUsers.panelRender()">Dashboard</a>
                 <i class="icon-angle-right"></i>
                 <a href="@routes.Certificates.certificateMain()">Certifikati</a>
@@ -28,23 +28,12 @@
                             <input class="input-xlarge focused" id="mark" name="mark" type="text" value="@certificate.mark" required>
                         </div>
                     </div>
+
                     <div class="control-group">
-                        <label class="control-label" for="name">Ime</label>
+                        <label class="control-label" for="name">Naziv</label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="name" name="name" type="text" value="@certificate.name" required>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="duration">Trajanje </label>
-                        <div class="controls">
-                            <input class="input-xlarge focused" id="duration" name="duration" type="number" value="@certificate.duration" min="0" required>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="category">Kategorija</label>
-                        <div class="controls">
-                            <select id="category" data-rel="chosen" name="category" required>
-                                <option selected>@certificate.category</option>
+                            <select id="name" data-rel="chosen" name="name" required>
+                                <option selected>@certificate.name</option>
                                 <option>EOQ MENADZER KVALITETE</option>
                                 <option>EOQ PROCESS MENADZER</option>
                                 <option>EOQ RISK MENADZER</option>
@@ -55,6 +44,14 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="duration">Trajanje </label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="duration" name="duration" type="number" value="@certificate.duration" min="0" required>
+                        </div>
+                    </div>
+
 
 
 

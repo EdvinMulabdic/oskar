@@ -1,5 +1,6 @@
 package controllers;
 
+import helpers.Authenticators;
 import models.Certificate;
 import models.Company;
 import models.Person;
@@ -8,6 +9,7 @@ import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +21,14 @@ public class Persons extends Controller {
 
 
             /* ------------------- personsMain render view ------------------ */
+            @Security.Authenticated(Authenticators.AdminFilter.class)
 
     public Result personsMain(){
         return ok(views.html.Persons.personsMain.render());
     }
 
             /* ------------------- create person view render ------------------ */
+            @Security.Authenticated(Authenticators.AdminFilter.class)
 
     public Result createPersonRender(){
         List<Certificate> certificates = Certificate.getAllCertificates();
@@ -32,6 +36,7 @@ public class Persons extends Controller {
     }
 
             /* ------------------- create person ------------------ */
+            @Security.Authenticated(Authenticators.AdminFilter.class)
 
     public Result createPerson(){
         List<Certificate> certificatesList = Certificate.getAllCertificates();
@@ -60,15 +65,12 @@ public class Persons extends Controller {
                 }
             }
         }
-
-
-        Logger.info("ID   " + certificates);
-
         Person.savePerson(name, lastname, company, phone, email, certificatesId);
 
         return redirect(routes.Persons.personsMain());
     }
             /* ------------------- update person view render ------------------ */
+            @Security.Authenticated(Authenticators.AdminFilter.class)
 
     public Result updatePersonRender(Integer personId){
         Person person = Person.findPersonById(personId);
@@ -76,6 +78,7 @@ public class Persons extends Controller {
     }
 
             /* ------------------- update person ------------------ */
+            @Security.Authenticated(Authenticators.AdminFilter.class)
 
     public Result updatePerson(Integer personid){
         DynamicForm form = Form.form().bindFromRequest();
@@ -92,6 +95,7 @@ public class Persons extends Controller {
     }
 
             /* ------------------- delete person ------------------ */
+            @Security.Authenticated(Authenticators.AdminFilter.class)
 
     public Result deletePerson(Integer personId){
         Person.deletePerson(personId);
@@ -99,6 +103,7 @@ public class Persons extends Controller {
     }
 
             /* ------------------- list of persons view ------------------ */
+            @Security.Authenticated(Authenticators.AdminFilter.class)
 
     public Result listOfPersons(){
         List<Person> persons = Person.getAllPersons();

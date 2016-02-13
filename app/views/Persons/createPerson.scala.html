@@ -5,7 +5,7 @@
 
         <ul class="breadcrumb">
             <li>
-                <i class="icon-dashboard"></i>
+                <i class="icon-bar-chart"></i>
                 <a href="@routes.AppUsers.panelRender()">Dashboard</a>
                 <i class="icon-angle-right"></i>
                 <a href="@routes.Persons.personsMain()">Osoblje</a>
@@ -76,16 +76,7 @@
         </div>
     </div>
 
-    <script src='@routes.Assets.versioned("javascripts/pokusaj.js")'></script>
-<script>
-function displayVals() {
-var multipleValues = $("#multiple").val() || [];
-  $("#certificateId").val(multipleValues.join( "," ));
-  console.log(multipleValues)
-}
+    <script src='@routes.Assets.versioned("javascripts/certificateId.js")'></script>
 
-$( "select" ).change( displayVals );
-
-</script>
 
 }

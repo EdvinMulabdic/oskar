@@ -4,7 +4,7 @@
 
         <ul class="breadcrumb">
             <li>
-                <i class="icon-dashboard"></i>
+                <i class="icon-bar-chart"></i>
                 <a href="@routes.AppUsers.panelRender()">Dashboard</a>
                 <i class="icon-angle-right"></i>
                 <a href="@routes.Certificates.certificateMain()">Certifikati</a>
@@ -25,22 +25,11 @@
                             <input class="input-xlarge focused" id="mark" name="mark" type="text" required>
                         </div>
                     </div>
+
                     <div class="control-group">
-                        <label class="control-label" for="name">Ime</label>
+                        <label class="control-label" for="category">Naziv</label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="name" name="name" type="text" required>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="duration">Trajanje </label>
-                        <div class="controls">
-                            <input class="input-xlarge focused" id="duration" name="duration" type="number" value="3" min="0" required>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="category">Kategorija</label>
-                        <div class="controls">
-                            <select id="category" data-rel="chosen" name="category" required>
+                            <select id="name" data-rel="chosen" name="name"  style="width: 284px;" required>
                                 <option>EOQ MENADZER KVALITETE</option>
                                 <option>EOQ PROCESS MENADZER</option>
                                 <option>EOQ RISK MENADZER</option>
@@ -51,6 +40,14 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="duration">Trajanje </label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="duration" name="duration" type="number" value="3" min="0" required>
+                        </div>
+                    </div>
+
 
 
 

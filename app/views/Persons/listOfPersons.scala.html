@@ -5,7 +5,7 @@
 
         <ul class="breadcrumb">
             <li>
-                <i class="icon-dashboard"></i>
+                <i class="icon-bar-chart"></i>
                 <a href="@routes.AppUsers.panelRender()">Dashboard</a>
                 <i class="icon-angle-right"></i>
                 <a href="@routes.Persons.personsMain()">Osoblje</a>
@@ -30,6 +30,8 @@
                                 <th>Firma</th>
                                 <th>Telefon</th>
                                 <th>Mail</th>
+                                <th>Certifikati</th>
+                                <th>Posalji mail</th>
                                 <th>Uredi</th>
                                 <th>Obrisi</th>
                             </tr>
@@ -43,6 +45,21 @@
                                     <td class="center">@person.company</td>
                                     <td class="center">@person.phone </td>
                                     <td class="center">@person.mail </td>
+                                    <td class="center">
+                                        <div class="controls">
+                                            <select  data-rel="chosen" >
+                                                @for(certificates <- person.certificates){
+                                                    <option>@certificates.name</option>
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </td>
+                                    <td class="center">
+                                        <a class="btn btn-info" href="@routes.Emails.sendEmailRender(person.id)">
+                                            <i class="halflings-icon white e-mail"></i>
+                                        </a>
+                                    </td>
                                     <td class="center">
                                         <a class="btn btn-info" href="@routes.Persons.updatePersonRender(person.id)">
                                             <i class="halflings-icon white edit"></i>
