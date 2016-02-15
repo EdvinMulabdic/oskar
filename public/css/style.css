@@ -3013,6 +3013,10 @@ ul.messagesList li span.date {
 .nav>li>a:hover, .nav>li>a:focus {
 	background-color: transparent;
 }
-#email{
+#emailTextArea{
     width: 800px;
+}
+
+.margin-bottom{
+	margin-bottom: 30px;
 }

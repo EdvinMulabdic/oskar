@@ -1,18 +1,7 @@
 @import helpers.ConfigProvider
-@(person: Person)
+
 @main{
     <div id="content" class="span10">
-
-        <ul class="breadcrumb">
-            <li>
-                <i class="icon-bar-chart"></i>
-                <a href="@routes.AppUsers.panelRender()">Dashboard</a>
-                <i class="icon-angle-right"></i>
-                <a href="@routes.Persons.personsMain()">Osoblje</a>
-                <i class="icon-angle-right"></i>
-                <a>Lista osoblja</a>
-            </li>
-        </ul>
 
         <div class="row-fluid sortable">
             <div class="box span12">
@@ -20,7 +9,7 @@
                     <h2><i class="halflings-icon white edit"></i><span class="break"></span>Posalji Email</h2>
                 </div>
                 <div class="box-content">
-                    <form method="POST" class="form-horizontal" role="form" enctype="multipart/form-data" action="@routes.Emails.sendEmail(person.id)">
+                    <form method="POST" class="form-horizontal" role="form" enctype="multipart/form-data" action="@routes.Emails.sendGroupEmailRender()">
                         <fieldset>
                             <div class="control-group">
                                 <label class="control-label" for="typeahead">From: </label>
@@ -31,7 +20,8 @@
                             <div class="control-group">
                                 <label class="control-label" for="typeahead">To: </label>
                                 <div class="controls">
-                                    <input type="text" class="span6 typeahead" id="mailTo" name="mailTo" data-provide="typeahead" value="@person.mail">
+
+                                        <input type="text" class="span6 typeahead" id="mailTo" name="mailTo" data-provide="typeahead" value="@for(company <- Company.vlada()){ @company.email}">
                                 </div>
                             </div>
                             <div class="control-group">
@@ -64,7 +54,6 @@
 
         </div><!--/row-->
 
-
-
     </div>
+
 }

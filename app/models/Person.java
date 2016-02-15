@@ -3,6 +3,7 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -97,6 +98,7 @@ public class Person extends Model {
         Person person = finder.where().eq("id", id).findUnique();
         return person;
     }
+
 
 
 }

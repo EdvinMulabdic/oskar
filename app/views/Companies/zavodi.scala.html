@@ -1,8 +1,6 @@
 @(companies: java.util.List[Company])
 @main{
     <div id="content" class="span10">
-
-
         <ul class="breadcrumb">
             <li>
                 <i class="icon-bar-chart"></i>
@@ -10,16 +8,17 @@
                 <i class="icon-angle-right"></i>
                 <a href="@routes.Companies.companyMain()">Firme</a>
                 <i class="icon-angle-right"></i>
-                <a>Lista firmi</a>
+                <a>Zavodi</a>
             </li>
         </ul>
-
 
         <div class="row-fluid sortable">
             <div class="box span12">
                 <div class="box-header" data-original-title>
-                    <h2><i class="halflings-icon white user"></i><span class="break"></span>Lista firmi</h2>
-
+                    <h2><i class="halflings-icon white user"></i><span class="break"></span>Zavodi</h2>
+                    <div class="box-icon">
+                        <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+                    </div>
                 </div>
                 <div class="box-content">
                     <table class="table table-striped table-bordered bootstrap-datatable datatable">
@@ -36,36 +35,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @if(companies!= null){
-                            @for(company <- companies){
-                                <tr>
-                                    <td>@company.id</td>
-                                    <td>@company.name</td>
-                                    <td>@company.email</td>
-                                    <td class="center">@company.phone</td>
-                                    <td class="center">@company.pdv</td>
-                                    <td class="center">@company.category</td>
-                                    <td class="center">
-                                        <a class="btn btn-info" href="@routes.Companies.updateCompanyRender(company.id)">
-                                            <i class="halflings-icon white edit"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-danger" href="@routes.Companies.deleteCompany(company.id)">
-                                            <i class="halflings-icon white trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
+                        @for(company <- companies){
+
+                            <tr>
+                                <td>@company.id</td>
+                                <td>@company.name</td>
+                                <td>@company.email</td>
+                                <td class="center">@company.phone</td>
+                                <td class="center">@company.pdv</td>
+                                <td class="center">@company.category</td>
+                                <td class="center">
+                                    <a class="btn btn-info" href="@routes.Companies.updateCompanyRender(company.id)">
+                                        <i class="halflings-icon white edit"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger" href="@routes.Companies.deleteCompany(company.id)">
+                                        <i class="halflings-icon white trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
                         }
+
                         </tbody>
                     </table>
                 </div>
             </div><!--/span-->
         </div><!--/row-->
-
-
-
     </div>
 
 }

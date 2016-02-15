@@ -2,11 +2,12 @@ package models;
 
 import com.avaje.ebean.Model;
 import helpers.ConfigProvider;
+import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
+import play.Logger;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -38,10 +39,9 @@ public class Email extends Model {
 
     }
 
-    public static void sendMultipleformMail(String emailTo, String subject, String mail, List<File> files){
+    public static void sendMultipleformMail(String emailTo, String subject, String mail,List<String> filePath){
 
         MultiPartEmail multiPartEmail = new MultiPartEmail();
-
         multiPartEmail.setHostName(ConfigProvider.SMTP_HOST);
         multiPartEmail.setSmtpPort(Integer.parseInt(ConfigProvider.SMTP_PORT));
         try {
@@ -53,8 +53,16 @@ public class Email extends Model {
             multiPartEmail.setSubject(subject);
             multiPartEmail.setMsg(mail);
 
-            for(int i = 0; i < files.size(); i++){
-                multiPartEmail.attach(files.get(i));
+
+
+            EmailAttachment attachment = new EmailAttachment();
+
+            attachment.setDisposition(EmailAttachment.ATTACHMENT);
+            attachment.setName("Dokument.pdf");
+            for(int i = 0; i < filePath.size(); i++){
+                attachment.setPath(filePath.get(i));
+                multiPartEmail.attach(attachment);
+
             }
 
             multiPartEmail.send();
@@ -63,7 +71,44 @@ public class Email extends Model {
         }
 
 
+        Logger.info("PATH   " + filePath);
+    }
+
+    public static void sendGroupEmail(List<String> mailTo, String subject, String mail, List<String> filePath ){
+
+
+        MultiPartEmail multiPartEmail = new MultiPartEmail();
+        multiPartEmail.setHostName(ConfigProvider.SMTP_HOST);
+        multiPartEmail.setSmtpPort(Integer.parseInt(ConfigProvider.SMTP_PORT));
+
+        try {
+                /*Configuring mail*/
+            multiPartEmail.setAuthentication(ConfigProvider.MAIL_FROM, ConfigProvider.MAIL_FROM_PASS);
+            multiPartEmail.setFrom(ConfigProvider.MAIL_FROM);
+            multiPartEmail.setStartTLSEnabled(true);
+            for(int i=0;  i < mailTo.size(); i++){
+                multiPartEmail.addBcc(mailTo.get(i));
+            }
+
+            multiPartEmail.setSubject(subject);
+            multiPartEmail.setMsg(mail);
+
+            EmailAttachment attachment = new EmailAttachment();
+
+            attachment.setDisposition(EmailAttachment.ATTACHMENT);
+            attachment.setName("Dokument.pdf");
+            for(int i = 0; i < filePath.size(); i++){
+                attachment.setPath(filePath.get(i));
+                multiPartEmail.attach(attachment);
+
+            }
+
+            multiPartEmail.send();
+        } catch (EmailException e) {
+            e.printStackTrace();
+        }
 
     }
+
 
 }
