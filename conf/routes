@@ -38,6 +38,11 @@ POST          /certifikati/:certificateId                 @controllers.Certifica
 GET           /certifikati/brisanje/:certificateId        @controllers.Certificates.deleteCertificate(certificateId: Integer)
 DELETE        /certifikati/brisanje/:certificateId        @controllers.Certificates.deleteCertificate(certificateId: Integer)
 
+#PersonsCertificates
+
+GET           /osoblje/dodajcertifikat/:personId          @controllers.PersonCertificates.addPersonsCertificateRender(personId: Integer)
+POST          /osoblje/dodajcertifikat/:personId          @controllers.PersonCertificates.addPersonsCertificate(personId: Integer)
+
 
 #Companies
 

@@ -32,7 +32,7 @@ public class Certificates extends Controller {
             /* ------------------- create certificate ------------------ */
             @Security.Authenticated(Authenticators.AdminFilter.class)
 
-    public Result createCertificate(){
+    public Result createCertificate() {
         DynamicForm form = Form.form().bindFromRequest();
         String mark = form.field("mark").value();
         String name = form.field("name").value();
@@ -62,7 +62,7 @@ public class Certificates extends Controller {
             /* ------------------- update certificate ------------------ */
             @Security.Authenticated(Authenticators.AdminFilter.class)
 
-    public Result updateCertificate(Integer certificateId){
+    public Result updateCertificate(Integer certificateId) {
         DynamicForm form = Form.form().bindFromRequest();
 
         String mark = form.field("mark").value();
@@ -76,7 +76,7 @@ public class Certificates extends Controller {
              /* ------------------- delete certificate ------------------ */
              @Security.Authenticated(Authenticators.AdminFilter.class)
 
-    public Result deleteCertificate(Integer certificateId){
+    public Result deleteCertificate(Integer certificateId) {
         Certificate.deleteCertificate(certificateId);
         return redirect(routes.Certificates.listOfCertificates());
     }

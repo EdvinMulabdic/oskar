@@ -22,26 +22,22 @@ public class Person extends Model {
     public String phone;
     public String mail;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "persons")
-    public List<Certificate> certificates;
-
     public Person(){
 
     }
 
-    public Person(String name, String lastName, String company, String phone, String mail, List<Certificate> certificates) {
+    public Person(String name, String lastName, String company, String phone, String mail) {
         this.name = name;
         this.lastName = lastName;
         this.company = company;
         this.phone = phone;
         this.mail = mail;
-        this.certificates = certificates;
     }
 
         /* ------------------- save person ------------------ */
 
 
-    public static void savePerson(String name, String lastName, String company, String phone, String mail, List<Certificate> certificates){
+    public static void savePerson(String name, String lastName, String company, String phone, String mail) {
 
         Person person = new Person();
         person.name = name;
@@ -49,7 +45,6 @@ public class Person extends Model {
         person.company = company;
         person.phone = phone;
         person.mail = mail;
-        person.certificates = certificates;
         person.save();
 
     }
@@ -57,7 +52,7 @@ public class Person extends Model {
         /* ------------------- update person ------------------ */
 
 
-    public static void updatePerson(String name, String lastName, String company, String phone, String mail, Integer personId){
+    public static void updatePerson(String name, String lastName, String company, String phone, String mail, Integer personId) {
 
         Person person = findPersonById(personId);
         person.name = name;

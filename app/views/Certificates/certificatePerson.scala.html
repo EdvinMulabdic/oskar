@@ -1,4 +1,4 @@
-@(certificates: java.util.List[Certificate])
+@(person: Person)
 @main {
     <div id="content" class="span10">
 
@@ -10,58 +10,48 @@
                 <i class="icon-angle-right"></i>
                 <a href="@routes.Persons.personsMain()">Osoblje</a>
                 <i class="icon-angle-right"></i>
-                <a>Dodaj osobu</a>
+                <a>Dodaj certifikat za @person.name</a>
             </li>
         </ul>
 
         <div class="box-content">
-            <form method="POST" class="form-horizontal" role="form" action="@routes.Persons.createPerson()">
+            <form method="POST" class="form-horizontal" role="form" action="@routes.PersonCertificates.addPersonsCertificate(person.id)">
+                <input class="input-xlarge focused" id="personId" name="personId" type="text" hidden value="@person.id">
                 <fieldset>
-
                     <div class="control-group">
                         <label class="control-label" for="name">Ime</label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="name" name="name" type="text">
+                            <input class="input-xlarge focused" id="name" name="name" type="text" readonly value="@person.name">
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="lastname">Prezime</label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="lastname" name="lastname" type="text">
+                            <input class="input-xlarge focused" id="lastname" name="lastname" type="text" readonly value="@person.lastName">
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="company">Firma</label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="company" name="company" type="text">
+                            <select  data-rel="chosen" name="certificateId">
+                            @for(certificate <- Certificate.getAllCertificates()) {
+                                <option value="@certificate.id">@certificate.name</option>
+                            }
+                            </select>
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="phone">Telefon</label>
+                        <label class="control-label" for="certificateDate">Datum certificiranja</label>
                         <div class="controls">
-                            <input class="input-xlarge focused" id="phone" name="phone" type="text">
+                            <input type="date"  class="date-check" name="certificateDate" id="checkIn"  required/>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label" for="email">Email</label>
-                        <div class="controls">
-                            <input class="input-xlarge focused" id="email" name="email" type="email">
-                        </div>
-                    </div>
+
                     <div class="form-actions">
-                        <button  onclick="displayVals()" type="submit" class="btn btn-primary">Dodaj</button>
+                        <button type="submit" class="btn btn-primary">Dodaj</button>
                     </div>
                 </fieldset>
-
-                <input id="certificateId" name="certificateId" style="display: none">
-
             </form>
-
 
         </div>
     </div>
-
-    <script src='@routes.Assets.versioned("javascripts/certificateId.js")'></script>
-
-
 }

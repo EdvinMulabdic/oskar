@@ -65,7 +65,8 @@ public class Persons extends Controller {
                 }
             }
         }
-        Person.savePerson(name, lastname, company, phone, email, certificatesId);
+
+        Person.savePerson(name, lastname, company, phone, email);
 
         return redirect(routes.Persons.personsMain());
     }

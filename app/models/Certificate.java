@@ -19,22 +19,18 @@ public class Certificate extends Model {
     public String name;
     public String duration;
 
-    @ManyToMany
-    public List<Person> persons;
-
-    public Certificate(){
+    public Certificate() {
 
     }
     public Certificate(String mark, String name, String duration, List<Person> persons) {
         this.mark = mark;
         this.name = name;
         this.duration = duration;
-        this.persons = persons;
     }
             /* ------------------- create certificate ------------------ */
 
 
-    public static void createCertificate(String mark, String name, String duration){
+    public static void createCertificate(String mark, String name, String duration) {
 
         Certificate certificate = new Certificate();
         certificate.mark = mark;
@@ -46,7 +42,7 @@ public class Certificate extends Model {
 
             /* ------------------- update certificate ------------------ */
 
-    public static void updateCertificate(String mark, String name, String duration, Integer certificateId){
+    public static void updateCertificate(String mark, String name, String duration, Integer certificateId) {
 
         Certificate certificate = findCertificateById(certificateId);
         certificate.mark = mark;
@@ -59,7 +55,7 @@ public class Certificate extends Model {
 
              /* ------------------- delete certificate ------------------ */
 
-    public static void deleteCertificate(Integer certificateId){
+    public static void deleteCertificate(Integer certificateId) {
         Certificate certificate = findCertificateById(certificateId);
         certificate.delete();
     }
@@ -67,7 +63,7 @@ public class Certificate extends Model {
 
              /* ------------------- get all certificates ------------------ */
 
-    public static List<Certificate> getAllCertificates(){
+    public static List<Certificate> getAllCertificates() {
         Model.Finder<String, Certificate> finder = new Model.Finder<>(Certificate.class);
         List<Certificate> certificates = finder.all();
         return certificates;
@@ -75,7 +71,7 @@ public class Certificate extends Model {
 
              /* ------------------- get number of certificates in database ------------------ */
 
-    public static Integer getAllCertificatesSize(){
+    public static Integer getAllCertificatesSize() {
         Integer numberOfCertificates= finder.all().size();
         return numberOfCertificates;
     }

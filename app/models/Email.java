@@ -39,7 +39,7 @@ public class Email extends Model {
 
     }
 
-    public static void sendMultipleformMail(String emailTo, String subject, String mail,List<String> filePath){
+    public static void sendMultipleformMail(String emailTo, String subject, String mail,List<String> filePath) {
 
         MultiPartEmail multiPartEmail = new MultiPartEmail();
         multiPartEmail.setHostName(ConfigProvider.SMTP_HOST);
@@ -69,12 +69,9 @@ public class Email extends Model {
         } catch (EmailException e) {
             e.printStackTrace();
         }
-
-
-        Logger.info("PATH   " + filePath);
     }
 
-    public static void sendGroupEmail(List<String> mailTo, String subject, String mail, List<String> filePath ){
+    public static void sendGroupEmail(List<String> mailTo, String subject, String mail, List<String> filePath) {
 
 
         MultiPartEmail multiPartEmail = new MultiPartEmail();
