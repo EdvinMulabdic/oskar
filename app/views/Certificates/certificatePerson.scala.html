@@ -16,7 +16,7 @@
 
         <div class="box-content">
             <form method="POST" class="form-horizontal" role="form" action="@routes.PersonCertificates.addPersonsCertificate(person.id)">
-                <input class="input-xlarge focused" id="personId" name="personId" type="text" hidden value="@person.id">
+                <input class="input-xlarge focused" id="personId" name="personId" type="text" style="display: none" value="@person.id">
                 <fieldset>
                     <div class="control-group">
                         <label class="control-label" for="name">Ime</label>

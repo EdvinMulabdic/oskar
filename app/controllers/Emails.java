@@ -88,4 +88,11 @@ public class Emails extends Controller {
         return redirect(routes.Companies.companyMain());
 
     }
+
+                /* ------------------- send mail to to everyone with expiring certificate  ------------------ */
+
+    public Result checkForExpiringCertificate(){
+        Email.checkForExpiringCertificate();
+        return ok();
+    }
 }

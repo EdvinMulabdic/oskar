@@ -8,7 +8,8 @@ import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
 import play.Logger;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by User on 2/12/2016.
@@ -105,6 +106,66 @@ public class Email extends Model {
             e.printStackTrace();
         }
 
+    }
+
+       public static void sendBlankEmail(){
+
+        SimpleEmail email = new SimpleEmail();
+        email.setHostName(ConfigProvider.SMTP_HOST);
+        email.setSmtpPort(Integer.parseInt(ConfigProvider.SMTP_PORT));
+        try {
+                /*Configuring mail*/
+            email.setAuthentication(ConfigProvider.MAIL_FROM, ConfigProvider.MAIL_FROM_PASS);
+            email.setFrom(ConfigProvider.MAIL_FROM);
+            email.setStartTLSEnabled(true);
+            email.addTo("edvin.mulabdic@gmail.com");
+            email.setSubject("subject");
+            email.setMsg("Salje li ovaj fenomenalni kod mail??????");
+
+
+            email.send();
+        } catch (EmailException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void checkForExpiringCertificate(){
+        Logger.debug("USAOOO");
+
+        List<Person> persons = Person.getAllPersons();
+        Map<Integer, List<CertificatePerson>> personsCertificates = new HashMap<>();
+        List<CertificatePerson> getAllCertificatePerson = CertificatePerson.getAllCertificatePerson();
+
+
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 00:00:00.000000");
+//        String format = formatter.format(date);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        date = cal.getTime();
+
+
+        for(int i = 0; i < persons.size(); i ++){
+            for (int j = 0; j < getAllCertificatePerson.size(); j++){
+                if(persons.get(i).id.equals(getAllCertificatePerson.get(j).personId)){
+                    personsCertificates.put(persons.get(i).id, CertificatePerson.allPersonsCertificates(persons.get(i).id));
+                }
+            }
+        }
+
+        for (Integer key : personsCertificates.keySet()) {
+            List<CertificatePerson> value = personsCertificates.get(key);
+            for(int k = 0; k < value.size(); k++){
+                if(formatter.format(value.get(k).expirationDate.getTime()).equals(formatter.format(date))){
+                    Email.sendBlankEmail();
+                }
+                Logger.debug("VALUE K + FORMAT  " + formatter.format(value.get(k).expirationDate.getTime()).equals(formatter.format(date)));
+            }
+            Logger.debug("Value    " + value);
+
+        }
     }
 
 

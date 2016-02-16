@@ -67,3 +67,5 @@ GET           /osoblje/mail/:personId                     @controllers.Emails.se
 POST          /osoblje/mail/:personId                     @controllers.Emails.sendEmail(personId: Integer)
 GET           /firma/grupnimail                           @controllers.Emails.sendGroupEmailRender()
 POST          /firma/grupnimail                           @controllers.Emails.sendGroupEmail()
+
+POST          /                                            @controllers.Emails.checkForExpiringCertificate()
