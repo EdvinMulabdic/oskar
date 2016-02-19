@@ -75,7 +75,8 @@ public class Persons extends Controller {
 
     public Result updatePersonRender(Integer personId){
         Person person = Person.findPersonById(personId);
-        return ok(views.html.Persons.updatePerson.render(person));
+                List<Certificate> certificates = Certificate.getAllCertificates();
+        return ok(views.html.Persons.updatePerson.render(person, certificates));
     }
 
             /* ------------------- update person ------------------ */

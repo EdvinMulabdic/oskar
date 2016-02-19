@@ -2,6 +2,7 @@ package controllers;
 
 import helpers.Authenticators;
 import models.Certificate;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;

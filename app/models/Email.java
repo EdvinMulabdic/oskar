@@ -6,7 +6,6 @@ import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
-import play.Logger;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -108,7 +107,12 @@ public class Email extends Model {
 
     }
 
-       public static void sendBlankEmail(){
+       public static void sendBlankEmail(List<Integer> personsId){
+        List<Person> persons = new ArrayList<>();
+           for(int i = 0; i < personsId.size(); i++){
+               persons.add(Person.findPersonById(personsId.get(i)));
+           }
+
 
         SimpleEmail email = new SimpleEmail();
         email.setHostName(ConfigProvider.SMTP_HOST);
@@ -118,7 +122,10 @@ public class Email extends Model {
             email.setAuthentication(ConfigProvider.MAIL_FROM, ConfigProvider.MAIL_FROM_PASS);
             email.setFrom(ConfigProvider.MAIL_FROM);
             email.setStartTLSEnabled(true);
-            email.addTo("edvin.mulabdic@gmail.com");
+
+            for (int j = 0; j < persons.size(); j++){
+                email.addBcc(persons.get(j).mail);
+            }
             email.setSubject("subject");
             email.setMsg("Salje li ovaj fenomenalni kod mail??????");
 
@@ -131,17 +138,15 @@ public class Email extends Model {
     }
 
     public static void checkForExpiringCertificate(){
-        Logger.debug("USAOOO");
 
         List<Person> persons = Person.getAllPersons();
         Map<Integer, List<CertificatePerson>> personsCertificates = new HashMap<>();
         List<CertificatePerson> getAllCertificatePerson = CertificatePerson.getAllCertificatePerson();
+        List<Integer> personsId = new ArrayList<>();
 
 
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 00:00:00.000000");
-//        String format = formatter.format(date);
-
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         date = cal.getTime();
@@ -159,12 +164,10 @@ public class Email extends Model {
             List<CertificatePerson> value = personsCertificates.get(key);
             for(int k = 0; k < value.size(); k++){
                 if(formatter.format(value.get(k).expirationDate.getTime()).equals(formatter.format(date))){
-                    Email.sendBlankEmail();
+                    personsId.add(value.get(k).personId);
+                    Email.sendBlankEmail(personsId);
                 }
-                Logger.debug("VALUE K + FORMAT  " + formatter.format(value.get(k).expirationDate.getTime()).equals(formatter.format(date)));
             }
-            Logger.debug("Value    " + value);
-
         }
     }
 

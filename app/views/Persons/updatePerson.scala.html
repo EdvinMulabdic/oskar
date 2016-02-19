@@ -1,4 +1,4 @@
-@(person: Person)
+@(person: Person)(certificates: java.util.List[Certificate])
 @main{
     <div id="content" class="span10">
 
@@ -55,11 +55,9 @@
                         <label class="control-label" for="cerifikati">Certifikati </label>
                         <div class="controls">
                             <select id="certifikati" multiple data-rel="chosen">
-                                <option>Certifikat 1</option>
-                                <option selected>Certifikat 2</option>
-                                <option>Certifikat 3</option>
-                                <option>Certifikat 4</option>
-                                <option>Certifikat 5</option>
+                                @for(certificate <- certificates){
+                                    <option> @certificate.name</option>
+                                }
                             </select>
                         </div>
                     </div>
