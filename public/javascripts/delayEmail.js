@@ -9,4 +9,4 @@ $(document).ready(setInterval(function(){
     }).success(function(response) {
 
     });
-}, 2000000000));
+}, 100000000));

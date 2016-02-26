@@ -24,7 +24,6 @@ public class PersonCertificates extends Controller {
 
         DynamicForm form = Form.form().bindFromRequest();
         Integer personId = Integer.parseInt(form.field("personId").value());
-        Logger.debug(form.field("certificateId").value());
         Integer certificateId = Integer.parseInt(form.field("certificateId").value());
         String certificateDate = form.field("certificateDate").value();
 

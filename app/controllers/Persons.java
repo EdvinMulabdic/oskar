@@ -3,6 +3,7 @@ package controllers;
 import helpers.Authenticators;
 import models.Certificate;
 import models.Company;
+import models.Email;
 import models.Person;
 import play.Logger;
 import play.data.DynamicForm;

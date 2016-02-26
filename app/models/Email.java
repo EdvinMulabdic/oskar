@@ -107,10 +107,12 @@ public class Email extends Model {
 
     }
 
-       public static void sendBlankEmail(List<Integer> personsId){
+       public static void sendBlankEmail(List<Integer> personsId, Integer certificateId){
+           Certificate certificate = Certificate.findCertificateById(certificateId);
         List<Person> persons = new ArrayList<>();
-           for(int i = 0; i < personsId.size(); i++){
+           for(int i = 0; i < personsId.size(); i++) {
                persons.add(Person.findPersonById(personsId.get(i)));
+               sentMail.add(Person.findPersonById(personsId.get(i)));
            }
 
 
@@ -127,7 +129,7 @@ public class Email extends Model {
                 email.addBcc(persons.get(j).mail);
             }
             email.setSubject("subject");
-            email.setMsg("Salje li ovaj fenomenalni kod mail??????");
+            email.setMsg("Postovani, Vas certifikat " +  certificate.name + " istice za 1 godinu" );
 
 
             email.send();
@@ -145,6 +147,7 @@ public class Email extends Model {
         List<Integer> personsId = new ArrayList<>();
 
 
+
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 00:00:00.000000");
         Calendar cal = Calendar.getInstance();
@@ -152,23 +155,34 @@ public class Email extends Model {
         date = cal.getTime();
 
 
+
         for(int i = 0; i < persons.size(); i ++){
             for (int j = 0; j < getAllCertificatePerson.size(); j++){
                 if(persons.get(i).id.equals(getAllCertificatePerson.get(j).personId)){
                     personsCertificates.put(persons.get(i).id, CertificatePerson.allPersonsCertificates(persons.get(i).id));
                 }
+
             }
         }
 
         for (Integer key : personsCertificates.keySet()) {
             List<CertificatePerson> value = personsCertificates.get(key);
             for(int k = 0; k < value.size(); k++){
+
                 if(formatter.format(value.get(k).expirationDate.getTime()).equals(formatter.format(date))){
                     personsId.add(value.get(k).personId);
-                    Email.sendBlankEmail(personsId);
+                    Email.sendBlankEmail(personsId,value.get(k).certificateId);
                 }
+
             }
         }
+    }
+
+    public static List<Person> sentMail = new ArrayList<>();
+
+    public static Integer numberOfSentMails(){
+
+        return  sentMail.size();
     }
 
 

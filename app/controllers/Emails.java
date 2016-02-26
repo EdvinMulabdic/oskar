@@ -11,7 +11,6 @@ package controllers;
         import play.mvc.Http;
         import play.mvc.Result;
         import views.html.email;
-        import views.html.groupEmail;
 
         import java.io.File;
         import java.io.IOException;
@@ -52,9 +51,30 @@ public class Emails extends Controller {
         return redirect(routes.Persons.listOfPersons());
     }
 
-    public Result sendGroupEmailRender(){
-        return ok(groupEmail.render());
+    public Result sendGroupEmailVladaRender(){
+        return ok(views.html.GroupEmails.groupEmailVlada.render());
     }
+    public Result sendGroupEmailKantoniRender(){
+        return ok(views.html.GroupEmails.groupEmailKantoni.render());
+    }
+    public Result sendGroupEmailKCentriRender(){
+        return ok(views.html.GroupEmails.groupEmailKCentri.render());
+    }
+    public Result sendGroupEmailZavodiRender() {
+        return ok(views.html.GroupEmails.groupEmailZavodi.render());
+    }
+    public Result sendGroupEmailLSRender(){
+        return ok(views.html.GroupEmails.groupEmailLS.render());
+    }
+    public Result sendGroupEmailPPRender(){
+        return ok(views.html.GroupEmails.groupEmailPP.render());
+    }
+    public Result sendGroupEmailVMSPRender(){
+        return ok(views.html.GroupEmails.groupEmailVMSP.render());
+    }
+
+
+
 
     public Result sendGroupEmail(){
         DynamicForm form = Form.form().bindFromRequest();
@@ -92,6 +112,7 @@ public class Emails extends Controller {
                 /* ------------------- send mail to to everyone with expiring certificate  ------------------ */
 
     public Result checkForExpiringCertificate(){
+        Email.sentMail.clear();
         Email.checkForExpiringCertificate();
         return ok();
     }
