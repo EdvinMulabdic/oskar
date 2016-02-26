@@ -50,19 +50,6 @@
                             <input class="input-xlarge focused" id="email" name="email" type="email" value="@person.mail" required>
                         </div>
                     </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="cerifikati">Certifikati </label>
-                        <div class="controls">
-                            <select id="certifikati" multiple data-rel="chosen">
-                                @for(certificate <- certificates){
-                                    <option> @certificate.name</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">Azuriraj</button>
                     </div>

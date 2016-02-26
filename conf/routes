@@ -42,6 +42,7 @@ DELETE        /certifikati/brisanje/:certificateId        @controllers.Certifica
 
 GET           /osoblje/dodajcertifikat/:personId          @controllers.PersonCertificates.addPersonsCertificateRender(personId: Integer)
 POST          /osoblje/dodajcertifikat/:personId          @controllers.PersonCertificates.addPersonsCertificate(personId: Integer)
+POST          /osoblje/dodajcertifikat1/:personId          @controllers.PersonCertificates.addAndAddAnotherPersonsCertificate(personId: Integer)
 
 
 #Companies

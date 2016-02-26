@@ -28,8 +28,28 @@ public class PersonCertificates extends Controller {
         Integer certificateId = Integer.parseInt(form.field("certificateId").value());
         String certificateDate = form.field("certificateDate").value();
 
+
         CertificatePerson.createPersonCertificate(personId, certificateId, certificateDate);
 
+
+        Logger.debug("dodaj");
+
         return redirect(routes.Persons.listOfPersons());
+    }
+
+
+    public Result addAndAddAnotherPersonsCertificate(Integer pId) {
+
+        DynamicForm form = Form.form().bindFromRequest();
+        Integer personId = Integer.parseInt(form.field("personId").value());
+        Logger.debug(form.field("certificateId").value());
+        Integer certificateId = Integer.parseInt(form.field("certificateId").value());
+        String certificateDate = form.field("certificateDate").value();
+
+        CertificatePerson.createPersonCertificate(personId, certificateId, certificateDate);
+
+        Logger.debug("spasi i dodaj novi");
+        Person person = Person.findPersonById(personId);
+        return ok(views.html.Certificates.certificatePerson.render(person));
     }
 }

@@ -15,7 +15,7 @@
         </ul>
 
         <div class="box-content">
-            <form method="POST" class="form-horizontal" role="form" action="@routes.PersonCertificates.addPersonsCertificate(person.id)">
+            <form method="POST" class="form-horizontal" role="form">
                 <input class="input-xlarge focused" id="personId" name="personId" type="text" style="display: none" value="@person.id">
                 <fieldset>
                     <div class="control-group">
@@ -47,7 +47,10 @@
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Dodaj</button>
+                        <button onclick="@routes.PersonCertificates.addPersonsCertificate(person.id)" class="btn btn-primary">Dodaj</button>
+                    </div>
+                    <div class="form-actions">
+                        <button onclick="@routes.PersonCertificates.addAndAddAnotherPersonsCertificate(person.id)" class="btn btn-primary">Spasi i dodaj novi</button>
                     </div>
                 </fieldset>
             </form>
