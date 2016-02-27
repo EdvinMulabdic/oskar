@@ -1,10 +1,12 @@
 package models;
 
 import com.avaje.ebean.Model;
+import helpers.ManagerHelper;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.ArrayList;
 import java.util.List;
-
 /**
  * Created by User on 2/9/2016.
  */
@@ -83,4 +85,58 @@ public class Certificate extends Model {
         return certificate;
     }
 
+    public static List<Person> mkvalitete() {
+        List<CertificatePerson> certificatePerson = CertificatePerson.getPersonsByCertificateId(ManagerHelper.MKVALITETE);
+        List<Person> persons = new ArrayList<>();
+
+        for (int i = 0; i < certificatePerson.size(); i++) {
+            Person person = Person.findPersonById(certificatePerson.get(i).personId);
+            persons.add(person);
+        }
+        return persons;
+    }
+
+    public static List<Person> mOkolisa() {
+        List<CertificatePerson> certificatePerson = CertificatePerson.getPersonsByCertificateId(ManagerHelper.MOKOLISA);
+        List<Person> persons = new ArrayList<>();
+
+        for (int i = 0; i < certificatePerson.size(); i++) {
+            Person person = Person.findPersonById(certificatePerson.get(i).personId);
+            persons.add(person);
+        }
+        return persons;
+    }
+
+    public static List<Person> mRizika() {
+        List<CertificatePerson> certificatePerson = CertificatePerson.getPersonsByCertificateId(ManagerHelper.MRIZIKA);
+        List<Person> persons = new ArrayList<>();
+
+        for (int i = 0; i < certificatePerson.size(); i++) {
+            Person person = Person.findPersonById(certificatePerson.get(i).personId);
+            persons.add(person);
+        }
+        return persons;
+    }
+
+    public static List<Person> mSH() {
+        List<CertificatePerson> certificatePerson = CertificatePerson.getPersonsByCertificateId(ManagerHelper.MSH);
+        List<Person> persons = new ArrayList<>();
+
+        for (int i = 0; i < certificatePerson.size(); i++) {
+            Person person = Person.findPersonById(certificatePerson.get(i).personId);
+            persons.add(person);
+        }
+        return persons;
+    }
+
+    public static List<Person> mZZS() {
+        List<CertificatePerson> certificatePerson = CertificatePerson.getPersonsByCertificateId(ManagerHelper.MZZS);
+        List<Person> persons = new ArrayList<>();
+
+        for (int i = 0; i < certificatePerson.size(); i++) {
+            Person person = Person.findPersonById(certificatePerson.get(i).personId);
+            persons.add(person);
+        }
+        return persons;
+    }
 }

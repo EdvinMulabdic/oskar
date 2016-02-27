@@ -2,7 +2,7 @@ package controllers;
 
 import helpers.Authenticators;
 import models.Certificate;
-import play.Logger;
+import models.Person;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -80,5 +80,40 @@ public class Certificates extends Controller {
     public Result deleteCertificate(Integer certificateId) {
         Certificate.deleteCertificate(certificateId);
         return redirect(routes.Certificates.listOfCertificates());
+    }
+
+    /* ------------------- menadzer kvalitete ------------------ */
+    @Security.Authenticated(Authenticators.AdminFilter.class)
+    public Result mKvalitete() {
+        List<Person> persons = Certificate.mkvalitete();
+        return ok(views.html.Manager.menadzerKvalitete.render(persons));
+    }
+
+    /* ------------------- menadzer okolisa ------------------ */
+    @Security.Authenticated(Authenticators.AdminFilter.class)
+    public Result mOkolisa() {
+        List<Person> persons = Certificate.mOkolisa();
+        return ok(views.html.Manager.menadzerOkolisa.render(persons));
+    }
+
+    /* ------------------- menadzer rizika ------------------ */
+    @Security.Authenticated(Authenticators.AdminFilter.class)
+    public Result mRizika(){
+        List<Person> persons = Certificate.mRizika();
+        return ok(views.html.Manager.menadzerRizika.render(persons));
+    }
+
+    /* ------------------- menadzer sigurnosti hrane ------------------ */
+    @Security.Authenticated(Authenticators.AdminFilter.class)
+    public Result mSH() {
+        List<Person> persons = Certificate.mSH();
+        return ok(views.html.Manager.menadzerSH.render(persons));
+    }
+
+    /* ------------------- menadzer zastite zdravlja i sigurosti ------------------ */
+    @Security.Authenticated(Authenticators.AdminFilter.class)
+    public Result mZZS() {
+        List<Person> persons = Certificate.mZZS();
+        return ok(views.html.Manager.menadzerZZS.render(persons));
     }
 }

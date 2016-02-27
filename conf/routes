@@ -74,7 +74,22 @@ GET           /firma/grupnimailZavodi                     @controllers.Emails.se
 GET           /firma/grupnimailVMSP                       @controllers.Emails.sendGroupEmailVMSPRender()
 POST          /firma/grupnimail                           @controllers.Emails.sendGroupEmail()
 
+
 POST          /                                           @controllers.Emails.checkForExpiringCertificate()
 
+#Notifikacije
 GET           /notifikacije                               @controllers.Notifications.mailedPersons()
-GET            /not                                       @controllers.Notifications.not()
+
+#Menadzeri
+
+GET           /menadzerkvalitete                          @controllers.Certificates.mKvalitete()
+GET           /menadzerokolisa                            @controllers.Certificates.mOkolisa()
+GET           /menadzerrizika                             @controllers.Certificates.mRizika()
+GET           /menadzersigurnostihrane                    @controllers.Certificates.mSH()
+GET           /menadzerzastitezdravljaisigurnosti         @controllers.Certificates.mZZS()
+
+GET           /grupnimailmkvalitete                       @controllers.Emails.sendGroupEmailMKvalitete()
+GET           /grupnimailmokolisa                         @controllers.Emails.sendGroupEmailMOkolisa()
+GET           /grupnimailmrizika                          @controllers.Emails.sendGroupEmailMRizika()
+GET           /grupnimailmsh                              @controllers.Emails.sendGroupEmailMSH()
+GET           /grupnimailmzzs                             @controllers.Emails.sendGroupEmailMZZS()

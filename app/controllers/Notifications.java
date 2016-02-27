@@ -18,9 +18,4 @@ public class Notifications extends Controller {
         return ok(views.html.Persons.notificationMails.render(Email.sentMail));
     }
 
-    public Result not(){
-        Integer numberOfNotifications = Email.numberOfSentMails();
-        Logger.info("num " + numberOfNotifications);
-        return ok(String.valueOf(numberOfNotifications));
-    }
 }

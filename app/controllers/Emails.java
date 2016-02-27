@@ -73,16 +73,30 @@ public class Emails extends Controller {
         return ok(views.html.GroupEmails.groupEmailVMSP.render());
     }
 
-
+    public Result sendGroupEmailMKvalitete(){
+        return ok(views.html.GroupEmails.groupEmailMKvalitete.render());
+    }
+    public Result sendGroupEmailMOkolisa(){
+        return ok(views.html.GroupEmails.groupEmailMOkolisa.render());
+    }
+    public Result sendGroupEmailMRizika(){
+        return ok(views.html.GroupEmails.groupEmailMRizika.render());
+    }
+    public Result sendGroupEmailMSH(){
+        return ok(views.html.GroupEmails.groupEmailMSH.render());
+    }
+    public Result sendGroupEmailMZZS(){
+        return ok(views.html.GroupEmails.groupEmailMZZS.render());
+    }
 
 
     public Result sendGroupEmail(){
         DynamicForm form = Form.form().bindFromRequest();
         String mailTo = form.field("mailTo").value();
-        String[] mailToList =mailTo.split(" ");
+        String[] mailToList = mailTo.split(" ");
         List<String> mails = new ArrayList<>();
         for(int i = 0; i < mailToList.length; i++){
-            if(mailToList[i].endsWith(".com")){
+            if(mailToList[i].length() > 3){
                 mails.add(mailToList[i]);
             }
         }
@@ -105,7 +119,7 @@ public class Emails extends Controller {
         Email.sendGroupEmail(mails, subject, mail, filePath);
 
 
-        return redirect(routes.Companies.companyMain());
+        return redirect(routes.AppUsers.panelRender());
 
     }
 

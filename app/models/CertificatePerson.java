@@ -82,6 +82,12 @@ public class CertificatePerson extends Model {
     public static List<CertificatePerson> getAllCertificatePerson(){
         return finder.all();
     }
+
+    public static List<CertificatePerson> getPersonsByCertificateId(Integer certificateId){
+
+        return finder.where().eq("certificate_id", certificateId).findList();
+    }
+
     public static List<CertificatePerson> allPersonsCertificates(Integer personId) {
         List<CertificatePerson> certificatePersons = finder.where().eq("personId", personId).findList();
 

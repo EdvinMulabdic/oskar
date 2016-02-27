@@ -392,6 +392,7 @@ a.brand span {
 	border-bottom-color: #fff !important;
 }
 
+
 /* Navigation Section
 =================================================================== */
 
@@ -3019,4 +3020,7 @@ ul.messagesList li span.date {
 
 .margin-bottom{
 	margin-bottom: 30px;
+}
+.height{
+	height: 170px;
 }

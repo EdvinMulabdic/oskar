@@ -1,0 +1,53 @@
+@(persons: java.util.List[Person])
+@main{
+    <div id="content" class="span10">
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-bar-chart"></i>
+                <a href="@routes.AppUsers.panelRender()">Dashboard</a>
+                <i class="icon-angle-right"></i>
+                <a href="@routes.Companies.companyMain()">Firme</a>
+                <i class="icon-angle-right"></i>
+                <a>Vlade</a>
+            </li>
+        </ul>
+
+        <div class="row-fluid sortable">
+            <div class="box span12">
+                <div class="box-header" data-original-title>
+                    <h2><i class="halflings-icon white user"></i>Vlade</h2>
+                    <div class="box-icon">
+                        <h2><a href="@routes.Emails.sendGroupEmailMOkolisa()"><i class="halflings-icon white envelope"></i></a>
+                            <span class="break"></span>Posalji mail</h2>
+                    </div>
+                </div>
+                <div class="box-content">
+                    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                        <thead>
+                            <tr>
+                                <th>Ime</th>
+                                <th>Prezime</th>
+                                <th>Kompanija</th>
+                                <th>Telefon</th>
+                                <th>Mail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @for(person <- persons){
+                            <tr>
+                                <td>@person.name</td>
+                                <td>@person.lastName</td>
+                                <td>@person.company</td>
+                                <td class="center">@person.phone</td>
+                                <td class="center">@person.mail</td>
+
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--/span-->
+        </div><!--/row-->
+    </div>
+
+}
