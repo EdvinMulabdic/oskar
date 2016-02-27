@@ -20,6 +20,7 @@ public class Certificate extends Model {
     public String mark;
     public String name;
     public String duration;
+    public Boolean isActive;
 
     public Certificate() {
 
@@ -28,6 +29,7 @@ public class Certificate extends Model {
         this.mark = mark;
         this.name = name;
         this.duration = duration;
+        isActive = true;
     }
             /* ------------------- create certificate ------------------ */
 
@@ -38,6 +40,7 @@ public class Certificate extends Model {
         certificate.mark = mark;
         certificate.name = name;
         certificate.duration = duration;
+        certificate.isActive = true;
 
         certificate.save();
     }
@@ -55,19 +58,36 @@ public class Certificate extends Model {
 
     }
 
-             /* ------------------- delete certificate ------------------ */
+             /* ------------------- archive certificate ------------------ */
 
-    public static void deleteCertificate(Integer certificateId) {
+    public static void archiveCertificate(Integer certificateId) {
         Certificate certificate = findCertificateById(certificateId);
-        certificate.delete();
+        certificate.isActive = false;
+        certificate.save();
+    }
+
+                 /* ------------------- activate certificate ------------------ */
+
+    public static void activateCertificate(Integer certificateId) {
+        Certificate certificate = findCertificateById(certificateId);
+        certificate.isActive = true;
+        certificate.save();
     }
 
 
-             /* ------------------- get all certificates ------------------ */
+             /* ------------------- get active certificates ------------------ */
 
-    public static List<Certificate> getAllCertificates() {
+    public static List<Certificate> getActiveCertificates() {
         Model.Finder<String, Certificate> finder = new Model.Finder<>(Certificate.class);
-        List<Certificate> certificates = finder.all();
+        List<Certificate> certificates = finder.where().eq("is_active", true).findList();
+        return certificates;
+    }
+
+                 /* ------------------- get archived certificates ------------------ */
+
+    public static List<Certificate> getArchivedCertificates() {
+        Model.Finder<String, Certificate> finder = new Model.Finder<>(Certificate.class);
+        List<Certificate> certificates = finder.where().eq("is_active", false).findList();
         return certificates;
     }
 

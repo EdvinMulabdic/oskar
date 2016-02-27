@@ -8,9 +8,9 @@
                 <i class="icon-bar-chart"></i>
                 <a href="@routes.AppUsers.panelRender()">Dashboard</a>
                 <i class="icon-angle-right"></i>
-                <a href="@routes.Certificates.certificateMain()">Certifikati</a>
+                <a href="@routes.Certificates.certificateMain()">Arhivirani certifikati</a>
                 <i class="icon-angle-right"></i>
-                <a>Lista certifikata</a>
+                <a>Lista arhiviranih certifikata</a>
             </li>
         </ul>
 
@@ -18,7 +18,7 @@
         <div class="row-fluid sortable">
             <div class="box span12">
                 <div class="box-header" data-original-title>
-                    <h2><i class="halflings-icon white user"></i><span class="break"></span>Lista certifikata</h2>
+                    <h2><i class="halflings-icon white user"></i><span class="break"></span>Lista arhiviranih certifikata</h2>
 
                 </div>
                 <div class="box-content">
@@ -29,8 +29,7 @@
                                 <th>Oznaka</th>
                                 <th>Naziv</th>
                                 <th>Trajanje</th>
-                                <th>Uredi</th>
-                                <th>Arhiviraj</th>
+                                <th>Aktiviraj</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,14 +40,9 @@
                                     <td>@certificate.mark</td>
                                     <td class="center">@certificate.name</td>
                                     <td class="center">@certificate.duration</td>
-                                    <td class="center">
-                                        <a class="btn btn-info" href="@routes.Certificates.updateCertificateRender(certificate.id)">
-                                            <i class="halflings-icon white edit"></i>
-                                        </a>
-                                    </td>
                                     <td>
-                                        <a class="btn btn-danger" href="@routes.Certificates.archiveCertificate(certificate.id)">
-                                            <i class="halflings-icon white folder-close"></i>
+                                        <a class="btn btn-danger" href="@routes.Certificates.activateCertificate(certificate.id)">
+                                            <i class="halflings-icon white folder-open"></i>
                                         </a>
                                     </td>
                                 </tr>

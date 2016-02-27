@@ -32,15 +32,15 @@ public class Persons extends Controller {
             @Security.Authenticated(Authenticators.AdminFilter.class)
 
     public Result createPersonRender(){
-        List<Certificate> certificates = Certificate.getAllCertificates();
+        List<Certificate> certificates = Certificate.getActiveCertificates();
         return ok(views.html.Persons.createPerson.render(certificates));
     }
 
             /* ------------------- create person ------------------ */
             @Security.Authenticated(Authenticators.AdminFilter.class)
 
-    public Result createPerson(){
-        List<Certificate> certificatesList = Certificate.getAllCertificates();
+    public Result createPerson() {
+        List<Certificate> certificatesList = Certificate.getActiveCertificates();
 
         DynamicForm form = Form.form().bindFromRequest();
 
@@ -76,7 +76,7 @@ public class Persons extends Controller {
 
     public Result updatePersonRender(Integer personId){
         Person person = Person.findPersonById(personId);
-                List<Certificate> certificates = Certificate.getAllCertificates();
+                List<Certificate> certificates = Certificate.getActiveCertificates();
         return ok(views.html.Persons.updatePerson.render(person, certificates));
     }
 

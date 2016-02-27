@@ -32,11 +32,14 @@ DELETE        /osoblje/brisanje/:personId                 @controllers.Persons.d
 GET           /certifikati                                @controllers.Certificates.certificateMain()
 GET           /certifikati/dodajcertifikat                @controllers.Certificates.createCertificateRender()
 POST          /certifikati/dodajcertifikat                @controllers.Certificates.createCertificate()
-GET           /certifikati/listacertifikata               @controllers.Certificates.listOfCertificates()
+GET           /certifikati/listacertifikata               @controllers.Certificates.listOfActiveCertificates()
+GET           /certifikati/listaarhiviranihcertifikata    @controllers.Certificates.listOfArchivedCertificates()
 GET           /certifikati/:certificateId                 @controllers.Certificates.updateCertificateRender(certificateId: Integer)
 POST          /certifikati/:certificateId                 @controllers.Certificates.updateCertificate(certificateId: Integer)
-GET           /certifikati/brisanje/:certificateId        @controllers.Certificates.deleteCertificate(certificateId: Integer)
-DELETE        /certifikati/brisanje/:certificateId        @controllers.Certificates.deleteCertificate(certificateId: Integer)
+GET           /certifikati/arhiviranje/:certificateId     @controllers.Certificates.archiveCertificate(certificateId: Integer)
+POST          /certifikati/arhiviranje/:certificateId     @controllers.Certificates.archiveCertificate(certificateId: Integer)
+GET           /certifikati/aktiviranje/:certificateId     @controllers.Certificates.activateCertificate(certificateId: Integer)
+POST          /certifikati/aktiviranje/:certificateId     @controllers.Certificates.activateCertificate(certificateId: Integer)
 
 #PersonsCertificates
 

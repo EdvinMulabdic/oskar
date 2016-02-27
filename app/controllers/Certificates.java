@@ -44,12 +44,20 @@ public class Certificates extends Controller {
         return redirect(routes.Certificates.certificateMain());
     }
 
-            /* ------------------- list of all certificates ------------------ */
+            /* ------------------- list of active all certificates ------------------ */
             @Security.Authenticated(Authenticators.AdminFilter.class)
 
-    public Result listOfCertificates(){
-        List<Certificate> certificates = Certificate.getAllCertificates();
+    public Result listOfActiveCertificates() {
+        List<Certificate> certificates = Certificate.getActiveCertificates();
         return ok(views.html.Certificates.listOfCertificates.render(certificates));
+    }
+
+    /* ------------------- list of archived certificates ------------------ */
+    @Security.Authenticated(Authenticators.AdminFilter.class)
+
+    public Result listOfArchivedCertificates() {
+        List<Certificate> certificates = Certificate.getArchivedCertificates();
+        return ok(views.html.Certificates.listOfArchivedCertificates.render(certificates));
     }
 
             /* ------------------- render update certificate view ------------------ */
@@ -71,15 +79,23 @@ public class Certificates extends Controller {
         String duration = form.field("duration").value();
 
         Certificate.updateCertificate(mark, name, duration, certificateId);
-        return redirect(routes.Certificates.listOfCertificates());
+        return redirect(routes.Certificates.listOfActiveCertificates());
     }
 
-             /* ------------------- delete certificate ------------------ */
-             @Security.Authenticated(Authenticators.AdminFilter.class)
+     /* ------------------- archive certificate ------------------ */
+     @Security.Authenticated(Authenticators.AdminFilter.class)
 
-    public Result deleteCertificate(Integer certificateId) {
-        Certificate.deleteCertificate(certificateId);
-        return redirect(routes.Certificates.listOfCertificates());
+    public Result archiveCertificate(Integer certificateId) {
+        Certificate.archiveCertificate(certificateId);
+        return redirect(routes.Certificates.listOfActiveCertificates());
+    }
+
+    /* ------------------- activate certificate ------------------ */
+    @Security.Authenticated(Authenticators.AdminFilter.class)
+
+    public Result activateCertificate(Integer certificateId) {
+        Certificate.activateCertificate(certificateId);
+        return redirect(routes.Certificates.listOfArchivedCertificates());
     }
 
     /* ------------------- menadzer kvalitete ------------------ */
