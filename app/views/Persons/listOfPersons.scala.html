@@ -20,13 +20,13 @@
                 <div class="box-header" data-original-title id="height">
                     <h2><i class="halflings-icon white user"></i><span class="break"></span>Lista osoblja</h2>
                     <div class="box-icon">
-                        <a class="btn btn-info" href="@routes.Emails.sendEmailRender(1)">
+                        <a id = "posaljiMail" class="btn btn-info" href="@routes.Emails.sendEmailRender(1)">
                             <i>POSALJI MAIL</i>
                         </a>
                     </div>
                 </div>
                 <div class="box-content">
-                    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                    <table id = "tableId" class="table table-striped table-bordered bootstrap-datatable datatable">
                         <thead>
                             <tr>
                                 <th>Ime</th>
@@ -65,11 +65,8 @@
                                             <i class="halflings-icon white plus"></i>
                                         </a>
                                     </td>
-
                                     <td class="text-center">
                                         <input type="checkbox" class="fa fa check-box" name="@person.id" value="@person.id">
-                                        <input name="edvin" value="1">
-
                                     </td>
                                     <td>
                                         <a class="btn btn-info" href="@routes.Persons.personFileRender(person.id)">
@@ -93,11 +90,31 @@
                     </table>
                 </div>
             </div><!--/span-->
-
         </div><!--/row-->
-
-
-
     </div>
 
+    <input type="text" id="personsToNotify" hidden>
+
+    <script>
+        $("#posaljiMail").click(function(event){
+            event.preventDefault();
+            var searchIDs = $("#tableId input:checkbox:checked").map(function(){
+                return $(this).val();
+            }).toArray();
+            console.log(searchIDs);
+
+             $('#personsToNotify').val(searchIDs);
+             console.log($('#personsToNotify').val());
+        });
+
+    function sendMails() {
+        $.ajax({
+            type: "GET",
+            url: "/"
+        }).success(function(response) {
+            location.reload();
+        });
+
+    }
+    </script>
 }

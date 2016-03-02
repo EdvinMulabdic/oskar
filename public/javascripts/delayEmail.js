@@ -5,10 +5,9 @@
 
 
 var now = new Date();
-console.log("NOW " + now)
-var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18,01, 0, 0);
+var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 01, 0, 0);
 
-$(document).ready(setInterval(function(){
+$(document).ready(setInterval(function() {
 
     $.ajax({
         type: "POST",
@@ -18,10 +17,7 @@ $(document).ready(setInterval(function(){
     });
 }, millisTill10.getTime()));
 
-
-
-function sendManualy(){
-    console.log("USAOOOOOOO")
+function sendManualy() {
     $.ajax({
         type: "POST",
         url: "/"

@@ -36,10 +36,10 @@ public class Emails extends Controller {
                 checkedPersons.add(checkBox);
             }
         }
-        String edvin = form.field("edvin").value();
-        Logger.debug("EDVIN      " + edvin);
+        String personsToNotify = form.field("personsToNotify").value();
+        Logger.debug("AAAAAAAAAAAAAAA      " + personsToNotify);
         Logger.info("CHECKED PERSON " + checkedPersons);
-        List<Person> person = new ArrayList<>() ;
+        List<Person> person = new ArrayList<>();
         for(int j = 0; j < checkedPersons.size(); j++){
             Person person1 = Person.findPersonById(Integer.parseInt(checkedPersons.get(j)));
             person.add(person1);
