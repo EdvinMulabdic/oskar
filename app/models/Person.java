@@ -2,8 +2,10 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 /**
@@ -21,17 +23,20 @@ public class Person extends Model {
     public String company;
     public String phone;
     public String mail;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    public List<File> files;
 
     public Person(){
 
     }
 
-    public Person(String name, String lastName, String company, String phone, String mail) {
+    public Person(String name, String lastName, String company, String phone, String mail, List<File> files) {
         this.name = name;
         this.lastName = lastName;
         this.company = company;
         this.phone = phone;
         this.mail = mail;
+        this.files = files;
     }
 
         /* ------------------- save person ------------------ */
@@ -95,5 +100,10 @@ public class Person extends Model {
     }
 
 
+     /* ------------------- person file------------------ */
+
+    public static void savePersonFile(){
+
+    }
 
 }

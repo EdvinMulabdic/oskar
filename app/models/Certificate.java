@@ -105,6 +105,8 @@ public class Certificate extends Model {
         return certificate;
     }
 
+
+
     public static List<Person> mkvalitete() {
         List<CertificatePerson> certificatePerson = CertificatePerson.getPersonsByCertificateId(ManagerHelper.MKVALITETE);
         List<Person> persons = new ArrayList<>();

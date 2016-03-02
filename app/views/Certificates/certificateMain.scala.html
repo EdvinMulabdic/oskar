@@ -16,9 +16,13 @@
                 @*<p>Dodaj certifikat</p>*@
             @*</a>*@
 
-            <a class="quick-button metro blue span2" href="@routes.Certificates.listOfActiveCertificates()">
+            <a class="quick-button metro blue span2 height" href="@routes.Certificates.listOfActiveCertificates()">
                 <i class="icon-list"></i>
-                <p>Lista certifikata</p>
+                <p>Lista aktivnih certifikata</p>
+            </a>
+            <a class="quick-button metro black span2 height" href="@routes.Certificates.listOfArchivedCertificates()">
+                <i class="icon-list"></i>
+                <p>Lista arhiviranih certifikata</p>
             </a>
         </div>
 

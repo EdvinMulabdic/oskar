@@ -14,14 +14,14 @@
               <div class="control-group">
                 <label class="control-label" for="typeahead">From: </label>
                 <div class="controls">
-                  <input type="text" class="span6 typeahead" id="mailFrom" name="mailFrom"  data-provide="typeahead" value="@ConfigProvider.MAIL_FROM">
+                  <input type="text" class="span6 typeahead" id="mailFrom" name="mailFrom"  data-provide="typeahead" value="@ConfigProvider.MAIL_FROM" readonly>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="typeahead">To: </label>
                 <div class="controls">
 
-                  <input type="text" class="span6 typeahead" id="mailTo" name="mailTo" data-provide="typeahead" value="@for(company <- Company.zavodi()){ @company.email}">
+                  <input type="text" class="span6 typeahead" id="mailTo" name="mailTo" data-provide="typeahead" value="@for(company <- Company.zavodi()){ @company.email}" readonly>
                 </div>
               </div>
               <div class="control-group">

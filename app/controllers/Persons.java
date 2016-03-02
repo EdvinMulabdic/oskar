@@ -1,10 +1,7 @@
 package controllers;
 
 import helpers.Authenticators;
-import models.Certificate;
-import models.Company;
-import models.Email;
-import models.Person;
+import models.*;
 import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -76,7 +73,7 @@ public class Persons extends Controller {
 
     public Result updatePersonRender(Integer personId){
         Person person = Person.findPersonById(personId);
-                List<Certificate> certificates = Certificate.getActiveCertificates();
+        List<Certificate> certificates = CertificatePerson.getAllPersonsCertificates(personId);
         return ok(views.html.Persons.updatePerson.render(person, certificates));
     }
 
@@ -113,6 +110,10 @@ public class Persons extends Controller {
         return ok(views.html.Persons.listOfPersons.render(persons));
     }
 
+        /* ------------------- person folder ------------------ */
 
-
+    public Result personFileRender(Integer personId){
+        Person person = Person.findPersonById(personId);
+        return ok(views.html.Persons.personFile.render(person));
+    }
 }

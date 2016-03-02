@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import play.Logger;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -92,5 +93,17 @@ public class CertificatePerson extends Model {
         List<CertificatePerson> certificatePersons = finder.where().eq("personId", personId).findList();
 
         return certificatePersons;
+    }
+
+
+    public static void deletePersonsCertificate(Integer personId, Integer certificateId){
+        List<CertificatePerson> personsCertificates = getPersonsByCertificateId(certificateId);
+        for(int i = 0; i < personsCertificates.size(); i ++){
+            Logger.info("PERSON ID  " + personsCertificates.get(i).id);
+            if(personsCertificates.get(i).personId == personId){
+                Logger.info("PERSON ID  " + personsCertificates.get(i).id);
+                personsCertificates.get(i).delete();
+            }
+        }
     }
 }

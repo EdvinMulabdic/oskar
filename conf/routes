@@ -3,96 +3,102 @@
 # ~~~~
 
 # Home page
-GET           /                                           @controllers.Application.index()
+GET           /                                               @controllers.Application.index()
 
 #Admin panel
 
-POST          /adminpanel                                 @controllers.AppUsers.loginRender()
-GET           /adminpanel                                 @controllers.AppUsers.panelRender()
-GET           /logout                                     @controllers.AppUsers.logout()
+POST          /adminpanel                                     @controllers.AppUsers.loginRender()
+GET           /adminpanel                                     @controllers.AppUsers.panelRender()
+GET           /logout                                         @controllers.AppUsers.logout()
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /assets/*file                               @controllers.Assets.versioned(path="/public", file: Asset)
+GET           /assets/*file                                   @controllers.Assets.versioned(path="/public", file: Asset)
 
 
 #Staff
 
-GET           /osoblje                                    @controllers.Persons.personsMain()
-GET           /osoblje/dodajosobu                         @controllers.Persons.createPersonRender()
-POST          /osoblje/dodajosobu                         @controllers.Persons.createPerson()
-GET           /osoblje/listaosoba                         @controllers.Persons.listOfPersons()
-GET           /osoblje/:personId                          @controllers.Persons.updatePersonRender(personId: Integer)
-POST          /osoblje/:personId                          @controllers.Persons.updatePerson(personId: Integer)
-GET           /osoblje/brisanje/:personId                 @controllers.Persons.deletePerson(personId: Integer)
-DELETE        /osoblje/brisanje/:personId                 @controllers.Persons.deletePerson(personId: Integer)
+GET           /osoblje                                        @controllers.Persons.personsMain()
+GET           /osoblje/dodajosobu                             @controllers.Persons.createPersonRender()
+POST          /osoblje/dodajosobu                             @controllers.Persons.createPerson()
+GET           /osoblje/listaosoba                             @controllers.Persons.listOfPersons()
+GET           /osoblje/:personId                              @controllers.Persons.updatePersonRender(personId: Integer)
+POST          /osoblje/:personId                              @controllers.Persons.updatePerson(personId: Integer)
+GET           /osoblje/brisanje/:personId                     @controllers.Persons.deletePerson(personId: Integer)
+DELETE        /osoblje/brisanje/:personId                     @controllers.Persons.deletePerson(personId: Integer)
 
 
 #Certificates
 
-GET           /certifikati                                @controllers.Certificates.certificateMain()
-GET           /certifikati/dodajcertifikat                @controllers.Certificates.createCertificateRender()
-POST          /certifikati/dodajcertifikat                @controllers.Certificates.createCertificate()
-GET           /certifikati/listacertifikata               @controllers.Certificates.listOfActiveCertificates()
-GET           /certifikati/listaarhiviranihcertifikata    @controllers.Certificates.listOfArchivedCertificates()
-GET           /certifikati/:certificateId                 @controllers.Certificates.updateCertificateRender(certificateId: Integer)
-POST          /certifikati/:certificateId                 @controllers.Certificates.updateCertificate(certificateId: Integer)
-GET           /certifikati/arhiviranje/:certificateId     @controllers.Certificates.archiveCertificate(certificateId: Integer)
-POST          /certifikati/arhiviranje/:certificateId     @controllers.Certificates.archiveCertificate(certificateId: Integer)
-GET           /certifikati/aktiviranje/:certificateId     @controllers.Certificates.activateCertificate(certificateId: Integer)
-POST          /certifikati/aktiviranje/:certificateId     @controllers.Certificates.activateCertificate(certificateId: Integer)
+GET           /certifikati                                    @controllers.Certificates.certificateMain()
+GET           /certifikati/dodajcertifikat                    @controllers.Certificates.createCertificateRender()
+POST          /certifikati/dodajcertifikat                    @controllers.Certificates.createCertificate()
+GET           /certifikati/listacertifikata                   @controllers.Certificates.listOfActiveCertificates()
+GET           /certifikati/listaarhiviranihcertifikata        @controllers.Certificates.listOfArchivedCertificates()
+GET           /certifikati/:certificateId                     @controllers.Certificates.updateCertificateRender(certificateId: Integer)
+POST          /certifikati/:certificateId                     @controllers.Certificates.updateCertificate(certificateId: Integer)
+GET           /certifikati/arhiviranje/:certificateId         @controllers.Certificates.archiveCertificate(certificateId: Integer)
+POST          /certifikati/arhiviranje/:certificateId         @controllers.Certificates.archiveCertificate(certificateId: Integer)
+GET           /certifikati/aktiviranje/:certificateId         @controllers.Certificates.activateCertificate(certificateId: Integer)
+POST          /certifikati/aktiviranje/:certificateId         @controllers.Certificates.activateCertificate(certificateId: Integer)
 
 #PersonsCertificates
 
-GET           /osoblje/dodajcertifikat/:personId          @controllers.PersonCertificates.addPersonsCertificateRender(personId: Integer)
-POST          /osoblje/dodajcertifikat/:personId          @controllers.PersonCertificates.addPersonsCertificate(personId: Integer)
+GET           /osoblje/dodajcertifikat/:personId              @controllers.PersonCertificates.addPersonsCertificateRender(personId: Integer)
+POST          /osoblje/dodajcertifikat/:personId              @controllers.PersonCertificates.addPersonsCertificate(personId: Integer)
 
 
 #Companies
 
-GET           /firme                                      @controllers.Companies.companyMain()
-GET           /firme/dodajfirmu                           @controllers.Companies.createCompanyRender()
-POST          /firme/dodajfirmu                           @controllers.Companies.createCompany()
-GET           /firme/listafirmi                           @controllers.Companies.listOfCompanies()
-GET           /firme/vlade                                @controllers.Companies.vlade()
-GET           /firme/kantoni                              @controllers.Companies.kantoni()
-GET           /firme/lokalnasamouprava                    @controllers.Companies.lokalnasamouprava()
-GET           /firme/zavodi                               @controllers.Companies.zavodi()
-GET           /firme/klinickicentri                       @controllers.Companies.klinickicentri()
-GET           /firme/prehrambeniproizvodjaci              @controllers.Companies.prehrambeniproizvodjaci()
-GET           /firme/velikamalaisrednjapreduzeca          @controllers.Companies.velikamalaisrednjapreduzeca()
-GET           /firme/:companyId                           @controllers.Companies.updateCompanyRender(companyId: Integer)
-POST          /firme/:companyId                           @controllers.Companies.updateCompany(companyId: Integer)
-GET           /firme/brisanje/:companyId                  @controllers.Companies.deleteCompany(companyId: Integer)
-DELETE        /firme/brisanje/:companyId                  @controllers.Companies.deleteCompany(companyId: Integer)
+GET           /firme                                          @controllers.Companies.companyMain()
+GET           /firme/dodajfirmu                               @controllers.Companies.createCompanyRender()
+POST          /firme/dodajfirmu                               @controllers.Companies.createCompany()
+GET           /firme/listafirmi                               @controllers.Companies.listOfCompanies()
+GET           /firme/vlade                                    @controllers.Companies.vlade()
+GET           /firme/kantoni                                  @controllers.Companies.kantoni()
+GET           /firme/lokalnasamouprava                        @controllers.Companies.lokalnasamouprava()
+GET           /firme/zavodi                                   @controllers.Companies.zavodi()
+GET           /firme/klinickicentri                           @controllers.Companies.klinickicentri()
+GET           /firme/prehrambeniproizvodjaci                  @controllers.Companies.prehrambeniproizvodjaci()
+GET           /firme/velikamalaisrednjapreduzeca              @controllers.Companies.velikamalaisrednjapreduzeca()
+GET           /firme/:companyId                               @controllers.Companies.updateCompanyRender(companyId: Integer)
+POST          /firme/:companyId                               @controllers.Companies.updateCompany(companyId: Integer)
+GET           /firme/brisanje/:companyId                      @controllers.Companies.deleteCompany(companyId: Integer)
+DELETE        /firme/brisanje/:companyId                      @controllers.Companies.deleteCompany(companyId: Integer)
 
 #Email
-GET           /osoblje/mail/:personId                     @controllers.Emails.sendEmailRender(personId: Integer)
-POST          /osoblje/mail/:personId                     @controllers.Emails.sendEmail(personId: Integer)
-GET           /firma/grupnimailVlada                      @controllers.Emails.sendGroupEmailVladaRender()
-GET           /firma/grupnimailKantoni                    @controllers.Emails.sendGroupEmailKantoniRender()
-GET           /firma/grupnimailKCentri                    @controllers.Emails.sendGroupEmailKCentriRender()
-GET           /firma/grupnimailLS                         @controllers.Emails.sendGroupEmailLSRender()
-GET           /firma/grupnimailPP                         @controllers.Emails.sendGroupEmailPPRender()
-GET           /firma/grupnimailZavodi                     @controllers.Emails.sendGroupEmailZavodiRender()
-GET           /firma/grupnimailVMSP                       @controllers.Emails.sendGroupEmailVMSPRender()
-POST          /firma/grupnimail                           @controllers.Emails.sendGroupEmail()
+GET           /osoblje/mail/:personId                         @controllers.Emails.sendEmailRender(personId: Integer)
+POST          /osoblje/mail/:personId                         @controllers.Emails.sendEmail(personId: Integer)
+GET           /firma/grupnimailVlada                          @controllers.Emails.sendGroupEmailVladaRender()
+GET           /firma/grupnimailKantoni                        @controllers.Emails.sendGroupEmailKantoniRender()
+GET           /firma/grupnimailKCentri                        @controllers.Emails.sendGroupEmailKCentriRender()
+GET           /firma/grupnimailLS                             @controllers.Emails.sendGroupEmailLSRender()
+GET           /firma/grupnimailPP                             @controllers.Emails.sendGroupEmailPPRender()
+GET           /firma/grupnimailZavodi                         @controllers.Emails.sendGroupEmailZavodiRender()
+GET           /firma/grupnimailVMSP                           @controllers.Emails.sendGroupEmailVMSPRender()
+POST          /firma/grupnimail                               @controllers.Emails.sendGroupEmail()
 
 
-POST          /                                           @controllers.Emails.checkForExpiringCertificate()
+POST          /                                               @controllers.Emails.checkForExpiringCertificate()
 
 #Notifikacije
-GET           /notifikacije                               @controllers.Notifications.mailedPersons()
+GET           /notifikacije                                   @controllers.Notifications.mailedPersons()
 
 #Menadzeri
 
-GET           /menadzerkvalitete                          @controllers.Certificates.mKvalitete()
-GET           /menadzerokolisa                            @controllers.Certificates.mOkolisa()
-GET           /menadzerrizika                             @controllers.Certificates.mRizika()
-GET           /menadzersigurnostihrane                    @controllers.Certificates.mSH()
-GET           /menadzerzastitezdravljaisigurnosti         @controllers.Certificates.mZZS()
+GET           /menadzerkvalitete                              @controllers.Certificates.mKvalitete()
+GET           /menadzerokolisa                                @controllers.Certificates.mOkolisa()
+GET           /menadzerrizika                                 @controllers.Certificates.mRizika()
+GET           /menadzersigurnostihrane                        @controllers.Certificates.mSH()
+GET           /menadzerzastitezdravljaisigurnosti             @controllers.Certificates.mZZS()
 
-GET           /grupnimailmkvalitete                       @controllers.Emails.sendGroupEmailMKvalitete()
-GET           /grupnimailmokolisa                         @controllers.Emails.sendGroupEmailMOkolisa()
-GET           /grupnimailmrizika                          @controllers.Emails.sendGroupEmailMRizika()
-GET           /grupnimailmsh                              @controllers.Emails.sendGroupEmailMSH()
-GET           /grupnimailmzzs                             @controllers.Emails.sendGroupEmailMZZS()
+GET           /grupnimailmkvalitete                           @controllers.Emails.sendGroupEmailMKvalitete()
+GET           /grupnimailmokolisa                             @controllers.Emails.sendGroupEmailMOkolisa()
+GET           /grupnimailmrizika                              @controllers.Emails.sendGroupEmailMRizika()
+GET           /grupnimailmsh                                  @controllers.Emails.sendGroupEmailMSH()
+GET           /grupnimailmzzs                                 @controllers.Emails.sendGroupEmailMZZS()
+
+GET           /obrisicertifikat/:personCertId                 @controllers.PersonCertificates.deleteCertificate(personCertId: String)
+
+#FOLDER
+GET           /file/:personId                                 @controllers.Persons.personFileRender(personId: Integer)
+POST          /file/:personId                                 @controllers.Files.saveFile(personId: Integer)

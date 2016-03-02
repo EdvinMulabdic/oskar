@@ -22,8 +22,29 @@ package controllers;
  */
 public class Emails extends Controller {
 
-    public Result sendEmailRender(Integer personId){
-        Person person = Person.findPersonById(personId);
+    public Result sendEmailRender(Integer personId) {
+        DynamicForm form = Form.form().bindFromRequest();
+
+        List<Person> persons = Person.getAllPersons();
+        List<String> checkedPersons = new ArrayList<>();
+        Logger.info("PERSONS SIZE  " + persons.size());
+        for(int i = 0; i < persons.size(); i++) {
+
+            String checkBox = form.field(persons.get(i).id.toString()).value();
+
+            if(checkBox != null){
+                checkedPersons.add(checkBox);
+            }
+        }
+        String edvin = form.field("edvin").value();
+        Logger.debug("EDVIN      " + edvin);
+        Logger.info("CHECKED PERSON " + checkedPersons);
+        List<Person> person = new ArrayList<>() ;
+        for(int j = 0; j < checkedPersons.size(); j++){
+            Person person1 = Person.findPersonById(Integer.parseInt(checkedPersons.get(j)));
+            person.add(person1);
+        }
+        Logger.info("PERSON " + person);
         return ok(email.render(person));
     }
 
@@ -39,7 +60,7 @@ public class Emails extends Controller {
         Http.MultipartFormData body1 = request().body().asMultipartFormData();
         List<Http.MultipartFormData.FilePart> fileParts = body1.getFiles();
 
-        if(fileParts != null){
+        if(fileParts != null) {
             for (Http.MultipartFormData.FilePart filePart : fileParts){
                 File file = filePart.getFile();
                 filePath.add(file.getPath());
@@ -90,7 +111,7 @@ public class Emails extends Controller {
     }
 
 
-    public Result sendGroupEmail(){
+    public Result sendGroupEmail() {
         DynamicForm form = Form.form().bindFromRequest();
         String mailTo = form.field("mailTo").value();
         String[] mailToList = mailTo.split(" ");

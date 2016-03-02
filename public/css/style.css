@@ -841,6 +841,9 @@ ul.messages li .message {
           box-shadow: none;
 	overflow: hidden;
 }
+#height{
+	height: auto;
+}
 
 .box-header h2{
 	float:left;
@@ -1520,8 +1523,8 @@ ul.chat.metro li.right .message .arrow {
 .form-actions {
   	padding: 19px 20px 20px;
   	margin: 20px -10px -30px -10px;
-  	background-color: #eee;
-  	border-top: 1px solid #eee;
+  	background:none;
+  	border-top: none;
   	*zoom: 1;
 }
 

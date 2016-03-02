@@ -6,6 +6,7 @@ import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
+import play.Logger;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -107,32 +108,79 @@ public class Email extends Model {
 
     }
 
-       public static void sendBlankEmail(List<Integer> personsId, Integer certificateId){
-           Certificate certificate = Certificate.findCertificateById(certificateId);
+    public static void sendEmailOneYear(List<Integer> personsId, Integer certificateId){
+        Certificate certificate = Certificate.findCertificateById(certificateId);
         List<Person> persons = new ArrayList<>();
-           for(int i = 0; i < personsId.size(); i++) {
-               persons.add(Person.findPersonById(personsId.get(i)));
-               sentMail.add(Person.findPersonById(personsId.get(i)));
-           }
+        for(int i = 0; i < personsId.size(); i++) {
+            persons.add(Person.findPersonById(personsId.get(i)));
+            sentMail.add(Person.findPersonById(personsId.get(i)));
+        }
 
+        MultiPartEmail multiPartEmail = new MultiPartEmail();
+        multiPartEmail.setHostName(ConfigProvider.SMTP_HOST);
+        multiPartEmail.setSmtpPort(Integer.parseInt(ConfigProvider.SMTP_PORT));
 
-        SimpleEmail email = new SimpleEmail();
-        email.setHostName(ConfigProvider.SMTP_HOST);
-        email.setSmtpPort(Integer.parseInt(ConfigProvider.SMTP_PORT));
         try {
                 /*Configuring mail*/
-            email.setAuthentication(ConfigProvider.MAIL_FROM, ConfigProvider.MAIL_FROM_PASS);
-            email.setFrom(ConfigProvider.MAIL_FROM);
-            email.setStartTLSEnabled(true);
+            multiPartEmail.setAuthentication(ConfigProvider.MAIL_FROM, ConfigProvider.MAIL_FROM_PASS);
+            multiPartEmail.setFrom(ConfigProvider.MAIL_FROM);
+            multiPartEmail.setStartTLSEnabled(true);
 
             for (int j = 0; j < persons.size(); j++){
-                email.addBcc(persons.get(j).mail);
+                multiPartEmail.addBcc(persons.get(j).mail);
             }
-            email.setSubject("subject");
-            email.setMsg("Postovani, Vas certifikat " +  certificate.name + " istice za 1 godinu" );
+            multiPartEmail.setSubject("subject");
+            multiPartEmail.setMsg("Postovani, Vas certifikat " + certificate.name + " istice za 1 godinu");
+
+            EmailAttachment attachment = new EmailAttachment();
+
+            attachment.setDisposition(EmailAttachment.ATTACHMENT);
+            attachment.setPath("E:/oskar/public/oskarFiles/Zahtjev za izdavanje certifikata.pdf");
+            attachment.setName("Zahtjev za izdavanje certifikata.pdf");
+            multiPartEmail.attach(attachment);
 
 
-            email.send();
+
+            multiPartEmail.send();
+        } catch (EmailException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void sendEmailSixMonths(List<Integer> personsId, Integer certificateId){
+        Certificate certificate = Certificate.findCertificateById(certificateId);
+        List<Person> persons = new ArrayList<>();
+        for(int i = 0; i < personsId.size(); i++) {
+            persons.add(Person.findPersonById(personsId.get(i)));
+            sentMail.add(Person.findPersonById(personsId.get(i)));
+        }
+
+        MultiPartEmail multiPartEmail = new MultiPartEmail();
+        multiPartEmail.setHostName(ConfigProvider.SMTP_HOST);
+        multiPartEmail.setSmtpPort(Integer.parseInt(ConfigProvider.SMTP_PORT));
+
+        try {
+                /*Configuring mail*/
+            multiPartEmail.setAuthentication(ConfigProvider.MAIL_FROM, ConfigProvider.MAIL_FROM_PASS);
+            multiPartEmail.setFrom(ConfigProvider.MAIL_FROM);
+            multiPartEmail.setStartTLSEnabled(true);
+
+            for (int j = 0; j < persons.size(); j++){
+                multiPartEmail.addBcc(persons.get(j).mail);
+            }
+            multiPartEmail.setSubject("subject");
+            multiPartEmail.setMsg("Postovani, Vas certifikat " + certificate.name + " istice za 6 mjeseci");
+
+            EmailAttachment attachment = new EmailAttachment();
+
+            attachment.setDisposition(EmailAttachment.ATTACHMENT);
+            attachment.setPath("../public/oskarFiles/Zahtjev za izdavanje certifikata.pdf");
+            attachment.setName("Zahtjev za izdavanje certifikata.pdf");
+            multiPartEmail.attach(attachment);
+
+
+
+            multiPartEmail.send();
         } catch (EmailException e) {
             e.printStackTrace();
         }
@@ -154,7 +202,8 @@ public class Email extends Model {
         cal.setTime(date);
         date = cal.getTime();
 
-
+        Long oneYear= 31556952000l - 86400000;
+        Long sixMonths = 15778476000l + 86400000;
 
         for(int i = 0; i < persons.size(); i ++){
             for (int j = 0; j < getAllCertificatePerson.size(); j++){
@@ -168,10 +217,16 @@ public class Email extends Model {
         for (Integer key : personsCertificates.keySet()) {
             List<CertificatePerson> value = personsCertificates.get(key);
             for(int k = 0; k < value.size(); k++){
+                Logger.info("DATUM   " + formatter.format(value.get(k).expirationDate.getTime() - oneYear));
+                Logger.info("DATUM   " + formatter.format(value.get(k).expirationDate.getTime() - sixMonths));
 
-                if(formatter.format(value.get(k).expirationDate.getTime()).equals(formatter.format(date))){
+                if(formatter.format(value.get(k).expirationDate.getTime() - oneYear).equals(formatter.format(date)))  {
                     personsId.add(value.get(k).personId);
-                    Email.sendBlankEmail(personsId,value.get(k).certificateId);
+                    Email.sendEmailOneYear(personsId, value.get(k).certificateId);
+                }else if (formatter.format(value.get(k).expirationDate.getTime() - sixMonths ).equals(formatter.format(date))){
+                    Logger.info("DATUM   " + formatter.format(value.get(k).expirationDate.getTime() - sixMonths ));
+                            personsId.add(value.get(k).personId);
+                    Email.sendEmailSixMonths(personsId, value.get(k).certificateId);
                 }
 
             }
@@ -181,7 +236,6 @@ public class Email extends Model {
     public static List<Person> sentMail = new ArrayList<>();
 
     public static Integer numberOfSentMails(){
-
         return  sentMail.size();
     }
 

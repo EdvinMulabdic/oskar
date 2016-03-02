@@ -16,10 +16,9 @@
             </li>
         </ul>
 
-        <div class="box-content">
+        <div class="box-content span6">
             <form method="POST" class="form-horizontal" role="form" action="@routes.Persons.updatePerson(person.id)">
                 <fieldset>
-
                     <div class="control-group">
                         <label class="control-label" for="name">Ime</label>
                         <div class="controls">
@@ -51,24 +50,45 @@
                         </div>
                     </div>
 
-                    <div class="control-group">
-                        <label class="control-label" for="cerifikati">Certifikati </label>
-                        <div class="controls">
-                            <select id="certifikati" multiple data-rel="chosen">
-                                @for(certificate <- certificates){
-                                    <option> @certificate.name</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">Azuriraj</button>
                     </div>
+
+
+
                 </fieldset>
             </form>
+        </div>
 
+        <div class="row-fluid sortable" style="margin-left: 14%">
+            <div class="box span5">
+                <div class="box-header">
+                    <h2><i class="halflings-icon white align-justify"></i><span class="break"></span>Certifikati</h2>
+                </div>
+                <div class="box-content">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Ime certifkata</th>
+                                <th>Obrisi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @for(certificate <- certificates) {
+                            <tr>
+                                <td>@certificate.name</td>
+                                <td class="center">
+                                    <a class="btn btn-danger" href="@routes.PersonCertificates.deleteCertificate(person.id + "-" + certificate.id)">
+                                        <i class="halflings-icon white trash"></i>
+                                    </a>
+                                </td>
+
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--/span-->
         </div>
     </div>
 

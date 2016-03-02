@@ -1,0 +1,38 @@
+@(person: Person)
+@main {
+    <div id="content" class="span10">
+
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-bar-chart"></i>
+                <a href="@routes.AppUsers.panelRender()">Dashboard</a>
+                <i class="icon-angle-right"></i>
+                <a href="@routes.Persons.personsMain()">Osoblje</a>
+                <i class="icon-angle-right"></i>
+                <a href="@routes.Persons.listOfPersons()">Lista osoblja</a>
+                <i class="icon-angle-right"></i>
+                <a>Folder </a>
+            </li>
+        </ul>
+
+        <div class="row-fluid sortable">
+            <div class="box-content">
+                <form method="POST" class="form-horizontal" role="form" enctype="multipart/form-data" action="@routes.Files.saveFile(person.id)">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="fileInput">File input</label>
+                            <div class="controls">
+                                <input type="file" name="files" accept="application/"  class="form-control" multiple/>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Dodaj dokument</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div><!--/row-->
+
+    </div>
+}

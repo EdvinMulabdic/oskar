@@ -31,4 +31,12 @@ public class PersonCertificates extends Controller {
 
         return redirect(routes.Persons.listOfPersons());
     }
+
+    public Result deleteCertificate(String personCertificateId){
+        String[] pcId = personCertificateId.split("-");
+        Integer personId = Integer.parseInt(pcId[0]);
+        Integer certificateId = Integer.parseInt(pcId[1]);
+        CertificatePerson.deletePersonsCertificate(personId, certificateId);
+        return redirect(routes.Persons.listOfPersons());
+    }
 }
