@@ -1,57 +1,60 @@
 package controllers;
+import models.Email;
+import models.Person;
+import play.Logger;
 
-        import models.Company;
-        import models.Email;
-        import models.Person;
-        import org.springframework.util.AutoPopulatingList;
-        import play.Logger;
-        import play.data.DynamicForm;
-        import play.data.Form;
-        import play.mvc.Controller;
-        import play.mvc.Http;
-        import play.mvc.Result;
-        import views.html.email;
+import play.data.DynamicForm;
+import play.data.Form;
+import play.mvc.Controller;
+import play.mvc.Http;
+import play.mvc.Result;
+import views.html.email;
 
-        import java.io.File;
-        import java.io.IOException;
-        import java.util.ArrayList;
-        import java.util.List;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by User on 2/12/2016.
  */
 public class Emails extends Controller {
 
-    public Result sendEmailRender(Integer personId) {
+    public Result sendEmailRender() {
         DynamicForm form = Form.form().bindFromRequest();
 
-        List<Person> persons = Person.getAllPersons();
+
+        List<Person> allPersons = Person.getAllPersons();
         List<String> checkedPersons = new ArrayList<>();
-        Logger.info("PERSONS SIZE  " + persons.size());
-        for(int i = 0; i < persons.size(); i++) {
 
-            String checkBox = form.field(persons.get(i).id.toString()).value();
-
+        for(int i = 0; i < allPersons.size(); i++) {
+            String checkBox = form.field(allPersons.get(i).id.toString()).value();
             if(checkBox != null){
                 checkedPersons.add(checkBox);
             }
         }
-        String edvin = form.field("edvin").value();
-        Logger.debug("EDVIN      " + edvin);
-        Logger.info("CHECKED PERSON " + checkedPersons);
-        List<Person> person = new ArrayList<>() ;
+
+        List<Person> persons = new ArrayList<>() ;
         for(int j = 0; j < checkedPersons.size(); j++){
             Person person1 = Person.findPersonById(Integer.parseInt(checkedPersons.get(j)));
-            person.add(person1);
+            persons.add(person1);
         }
-        Logger.info("PERSON " + person);
-        return ok(email.render(person));
+        return ok(email.render(persons));
     }
 
-    public Result sendEmail(Integer personId){
+    public Result sendEmail(){
         DynamicForm form = Form.form().bindFromRequest();
+        List<String> mailTo = new ArrayList<>();
 
-        String mailTo = form.field("mailTo").value();
+        String mailsToSplit = form.field("personsMail").value();
+
+        if(mailsToSplit.contains(",")) {
+            String[] mailArray = mailsToSplit.split(",");
+            for (int i = 0; i < mailArray.length; i++) {
+                mailTo.add(mailArray[i]);
+            }
+        }else{
+            mailTo.add(mailsToSplit);
+        }
         String subject = form.field("subject").value();
         String mail = form.field("mail").value();
 
@@ -144,7 +147,7 @@ public class Emails extends Controller {
 
     }
 
-                /* ------------------- send mail to to everyone with expiring certificate  ------------------ */
+    /* ------------------- send mail to to everyone with expiring certificate  ------------------ */
 
     public Result checkForExpiringCertificate(){
         Email.sentMail.clear();

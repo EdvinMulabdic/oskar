@@ -100,10 +100,5 @@ public class Person extends Model {
     }
 
 
-     /* ------------------- person file------------------ */
-
-    public static void savePersonFile(){
-
-    }
 
 }

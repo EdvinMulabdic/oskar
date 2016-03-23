@@ -40,7 +40,7 @@ public class Email extends Model {
 
     }
 
-    public static void sendMultipleformMail(String emailTo, String subject, String mail,List<String> filePath) {
+    public static void sendMultipleformMail(List<String> emailTo, String subject, String mail,List<String> filePath) {
 
         MultiPartEmail multiPartEmail = new MultiPartEmail();
         multiPartEmail.setHostName(ConfigProvider.SMTP_HOST);
@@ -50,7 +50,10 @@ public class Email extends Model {
             multiPartEmail.setAuthentication(ConfigProvider.MAIL_FROM, ConfigProvider.MAIL_FROM_PASS);
             multiPartEmail.setFrom(ConfigProvider.MAIL_FROM);
             multiPartEmail.setStartTLSEnabled(true);
-            multiPartEmail.addTo(emailTo);
+
+            for(int i = 0; i < emailTo.size(); i++){
+                multiPartEmail.addBcc(emailTo.get(i));
+            }
             multiPartEmail.setSubject(subject);
             multiPartEmail.setMsg(mail);
 

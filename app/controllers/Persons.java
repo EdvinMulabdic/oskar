@@ -111,9 +111,9 @@ public class Persons extends Controller {
     }
 
         /* ------------------- person folder ------------------ */
-
-    public Result personFileRender(Integer personId){
-        Person person = Person.findPersonById(personId);
-        return ok(views.html.Persons.personFile.render(person));
-    }
+//
+//    public Result personFileRender(Integer personId){
+//        Person person = Person.findPersonById(personId);
+//        return ok(views.html.Persons.personFile.render(person));
+//    }
 }

@@ -1,5 +1,5 @@
 @import helpers.ConfigProvider
-@(person: java.util.List[Person])
+@(persons: java.util.List[Person])
 @main{
     <div id="content" class="span10">
 
@@ -31,7 +31,11 @@
                             <div class="control-group">
                                 <label class="control-label" for="typeahead">To: </label>
                                 <div class="controls">
-                                    <input type="text" class="span6 typeahead" id="mailTo" name="mailTo" data-provide="typeahead" value="" disabled>
+                                    <select  data-rel="chosen" id="persons" >
+                                    @for(person <- persons) {
+                                        <option value="@person.mail">@person.mail</option>
+                                    }
+                                    </select>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -57,6 +61,7 @@
                                 <button type="submit" class="btn btn-primary">Posalji Mail</button>
                             </div>
                         </fieldset>
+                        <input type="text" id="personsMail" name="personsMail">
                     </form>
 
                 </div>
@@ -64,7 +69,17 @@
 
         </div><!--/row-->
 
-
-
     </div>
+
+    <script>
+        $(document).ready(function(){
+            var values = [];
+
+            $('#persons option').each(function() {
+                 values.push( $(this).attr('value') );
+            });
+
+            $('#personsMail').val(values);
+        });
+    </script>
 }
