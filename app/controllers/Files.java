@@ -33,6 +33,7 @@ public class Files extends Controller {
         if (files != null) {
             for (File file : files) {
                     results.add(file);
+                Logger.debug("ABSOLUTE PATH " + file.getAbsolutePath().replace('\\', '/'));
 
             }
         }
