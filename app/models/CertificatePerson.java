@@ -84,7 +84,7 @@ public class CertificatePerson extends Model {
         return finder.all();
     }
 
-    public static List<CertificatePerson> getPersonsByCertificateId(Integer certificateId){
+    public static List<CertificatePerson> getPersonsByCertificateId(Integer certificateId) {
 
         return finder.where().eq("certificate_id", certificateId).findList();
     }
@@ -96,11 +96,11 @@ public class CertificatePerson extends Model {
     }
 
 
-    public static void deletePersonsCertificate(Integer personId, Integer certificateId){
+    public static void deletePersonsCertificate(Integer personId, Integer certificateId) {
         List<CertificatePerson> personsCertificates = getPersonsByCertificateId(certificateId);
-        for(int i = 0; i < personsCertificates.size(); i ++){
+        for(int i = 0; i < personsCertificates.size(); i ++) {
             Logger.info("PERSON ID  " + personsCertificates.get(i).id);
-            if(personsCertificates.get(i).personId == personId){
+            if(personsCertificates.get(i).personId == personId) {
                 Logger.info("PERSON ID  " + personsCertificates.get(i).id);
                 personsCertificates.get(i).delete();
             }

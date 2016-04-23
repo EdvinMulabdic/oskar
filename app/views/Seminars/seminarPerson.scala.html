@@ -1,0 +1,57 @@
+@(person: Person)
+@main {
+  <div id="content" class="span10">
+
+
+    <ul class="breadcrumb">
+      <li>
+        <i class="icon-bar-chart"></i>
+        <a href="@routes.AppUsers.panelRender()">Dashboard</a>
+        <i class="icon-angle-right"></i>
+        <a href="@routes.Persons.personsMain()">Osoblje</a>
+        <i class="icon-angle-right"></i>
+        <a>Dodaj certifikat za @person.name</a>
+      </li>
+    </ul>
+
+    <div class="box-content">
+      <form method="POST" class="form-horizontal" role="form" action="@routes.PersonCertificates.addPersonsCertificate(person.id)">
+        <input class="input-xlarge focused" id="personId" name="personId" type="text" style="display: none" value="@person.id">
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="name">Ime</label>
+            <div class="controls">
+              <input class="input-xlarge focused" id="name" name="name" type="text" readonly value="@person.name">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="lastname">Prezime</label>
+            <div class="controls">
+              <input class="input-xlarge focused" id="lastname" name="lastname" type="text" readonly value="@person.lastName">
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <select  data-rel="chosen" name="certificateId">
+              @for(certificate <- Certificate.getActiveCertificates()) {
+                <option value="@certificate.id">@certificate.name</option>
+              }
+              </select>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="certificateDate">Datum certificiranja</label>
+            <div class="controls">
+              <input type="date"  class="date-check" name="certificateDate" id="checkIn"  required/>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Dodaj</button>
+          </div>
+        </fieldset>
+      </form>
+
+    </div>
+  </div>
+}

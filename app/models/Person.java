@@ -2,10 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -25,8 +22,10 @@ public class Person extends Model {
     public String mail;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     public List<File> files;
+    @ManyToMany
+    public Seminar seminar;
 
-    public Person(){
+    public Person() {
 
     }
 
