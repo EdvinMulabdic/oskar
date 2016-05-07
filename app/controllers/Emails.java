@@ -1,4 +1,6 @@
 package controllers;
+import com.google.common.collect.Lists;
+import models.Company;
 import models.Email;
 import models.Person;
 import play.Logger;
@@ -70,12 +72,16 @@ public class Emails extends Controller {
             }
         }
 
-        Email.sendMultipleformMail(mailTo, subject, mail, filePath);
+       Email.sendMultipleformMail(mailTo, subject, mail, filePath);
 
         return redirect(routes.Persons.listOfPersons());
     }
 
-    public Result sendGroupEmailVladaRender(){
+    public Result sendGroupEmailCompaniesRender() {
+        return ok(views.html.GroupEmails.groupEmailCompanies.render());
+    }
+
+    public Result sendGroupEmailVladaRender() {
         return ok(views.html.GroupEmails.groupEmailVlada.render());
     }
     public Result sendGroupEmailKantoniRender(){
@@ -112,6 +118,15 @@ public class Emails extends Controller {
     public Result sendGroupEmailMZZS(){
         return ok(views.html.GroupEmails.groupEmailMZZS.render());
     }
+    public Result sendGroupEmailAuditor(){
+        return ok(views.html.GroupEmails.groupEmailAuditor.render());
+    }
+    public Result sendGroupEmailInterniAuditor(){
+        return ok(views.html.GroupEmails.groupEmailInterniAuditor.render());
+    }
+    public Result sendGroupEmailProcesniMenadzer(){
+        return ok(views.html.GroupEmails.groupEmailProcesniMenadzer.render());
+    }
 
 
     public Result sendGroupEmail() {
@@ -119,11 +134,13 @@ public class Emails extends Controller {
         String mailTo = form.field("mailTo").value();
         String[] mailToList = mailTo.split(" ");
         List<String> mails = new ArrayList<>();
+
         for(int i = 0; i < mailToList.length; i++){
             if(mailToList[i].length() > 3){
                 mails.add(mailToList[i]);
             }
         }
+
 
         List<String> filePath = new ArrayList<>();
 
@@ -140,8 +157,17 @@ public class Emails extends Controller {
         String subject = form.field("subject").value();
         String mail = form.field("mail").value();
 
-        Email.sendGroupEmail(mails, subject, mail, filePath);
-
+//        List<List<String>> output = Lists.partition(mails, 20);
+//        for(List<String> l: output){
+//            for(int i = 0; i < l.size(); i++){
+//                mails400.add(l.get(i));
+//            }
+//            Email.sendGroupEmail(mails400, subject, mail, filePath);
+//            Logger.info(mails400 + "50 mailova");
+//        }
+        for(int i = 0; i < mails.size(); i++){
+            Email.sendEmail(mails.get(i), subject, mail);
+        }
 
         return redirect(routes.AppUsers.panelRender());
 
@@ -153,5 +179,10 @@ public class Emails extends Controller {
         Email.sentMail.clear();
         Email.checkForExpiringCertificate();
         return ok();
+    }
+
+
+    public Result sendSeminarEmailRender(Integer seminarId) {
+        return ok(views.html.seminars.sendMailToSeminarPersons.render(seminarId));
     }
 }

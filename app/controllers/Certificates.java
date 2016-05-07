@@ -3,6 +3,7 @@ package controllers;
 import helpers.Authenticators;
 import models.Certificate;
 import models.Person;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -131,5 +132,26 @@ public class Certificates extends Controller {
     public Result mZZS() {
         List<Person> persons = Certificate.mZZS();
         return ok(views.html.Manager.menadzerZZS.render(persons));
+    }
+
+    /* ------------------- auditor ------------------ */
+    @Security.Authenticated(Authenticators.AdminFilter.class)
+    public Result auditor() {
+        List<Person> persons = Certificate.auditor();
+        return ok(views.html.Manager.auditor.render(persons));
+    }
+
+    /* ------------------- interni auditor ------------------ */
+    @Security.Authenticated(Authenticators.AdminFilter.class)
+    public Result interniAuditor() {
+        List<Person> persons = Certificate.interniAuditor();
+        return ok(views.html.Manager.interniAuditor.render(persons));
+    }
+
+    /* ------------------- procesni menadzer ------------------ */
+    @Security.Authenticated(Authenticators.AdminFilter.class)
+    public Result procesniMenadzer() {
+        List<Person> persons = Certificate.procesniMenadzer();
+        return ok(views.html.Manager.procesniMenadzer.render(persons));
     }
 }

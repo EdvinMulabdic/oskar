@@ -1,11 +1,9 @@
 package models;
 
 import com.avaje.ebean.Model;
+import controllers.PersonCertificates;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -23,8 +21,11 @@ public class Person extends Model {
     public String company;
     public String phone;
     public String mail;
+    public Boolean isVisibleInSeminar;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     public List<File> files;
+
 
     public Person(){
 
@@ -50,6 +51,7 @@ public class Person extends Model {
         person.company = company;
         person.phone = phone;
         person.mail = mail;
+        person.isVisibleInSeminar = true;
         person.save();
 
     }
@@ -73,7 +75,11 @@ public class Person extends Model {
 
     public static void deletePerson(Integer personId){
         Person person = findPersonById(personId);
-        person.delete();
+        List<CertificatePerson> personsCertificates = CertificatePerson.allPersonsCertificates(personId);
+        for(int i = 0; i < personsCertificates.size(); i ++){
+            personsCertificates.get(i).delete();
+        }
+                person.delete();
     }
 
 
@@ -88,8 +94,7 @@ public class Person extends Model {
      /* ------------------- get number of persons in database ------------------ */
 
     public static Integer getAllPersonsSize(){
-        Integer numberOfPersons = finder.all().size();
-        return numberOfPersons;
+        return finder.findRowCount();
     }
 
         /* ------------------- finds person by id ------------------ */
@@ -98,7 +103,5 @@ public class Person extends Model {
         Person person = finder.where().eq("id", id).findUnique();
         return person;
     }
-
-
 
 }

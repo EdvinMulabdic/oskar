@@ -68,6 +68,7 @@ DELETE        /firme/brisanje/:companyId                      @controllers.Compa
 #Email
 GET           /osoblje/mail/                                  @controllers.Emails.sendEmailRender()
 POST          /osoblje/mail/                                  @controllers.Emails.sendEmail()
+GET           /firma/grupnimailfirme                          @controllers.Emails.sendGroupEmailCompaniesRender()
 GET           /firma/grupnimailVlada                          @controllers.Emails.sendGroupEmailVladaRender()
 GET           /firma/grupnimailKantoni                        @controllers.Emails.sendGroupEmailKantoniRender()
 GET           /firma/grupnimailKCentri                        @controllers.Emails.sendGroupEmailKCentriRender()
@@ -76,6 +77,7 @@ GET           /firma/grupnimailPP                             @controllers.Email
 GET           /firma/grupnimailZavodi                         @controllers.Emails.sendGroupEmailZavodiRender()
 GET           /firma/grupnimailVMSP                           @controllers.Emails.sendGroupEmailVMSPRender()
 POST          /firma/grupnimail                               @controllers.Emails.sendGroupEmail()
+GET           /seminarmail/:seminarId                         @controllers.Emails.sendSeminarEmailRender(seminarId: Integer)
 
 
 POST          /                                               @controllers.Emails.checkForExpiringCertificate()
@@ -90,12 +92,19 @@ GET           /menadzerokolisa                                @controllers.Certi
 GET           /menadzerrizika                                 @controllers.Certificates.mRizika()
 GET           /menadzersigurnostihrane                        @controllers.Certificates.mSH()
 GET           /menadzerzastitezdravljaisigurnosti             @controllers.Certificates.mZZS()
+GET           /auditor                                        @controllers.Certificates.auditor()
+GET           /interniauditor                                 @controllers.Certificates.interniAuditor()
+GET           /procesnimenadzer                               @controllers.Certificates.procesniMenadzer()
 
 GET           /grupnimailmkvalitete                           @controllers.Emails.sendGroupEmailMKvalitete()
 GET           /grupnimailmokolisa                             @controllers.Emails.sendGroupEmailMOkolisa()
 GET           /grupnimailmrizika                              @controllers.Emails.sendGroupEmailMRizika()
 GET           /grupnimailmsh                                  @controllers.Emails.sendGroupEmailMSH()
 GET           /grupnimailmzzs                                 @controllers.Emails.sendGroupEmailMZZS()
+GET           /grupnimailauditor                              @controllers.Emails.sendGroupEmailAuditor()
+GET           /grupnimailinterniauditor                       @controllers.Emails.sendGroupEmailInterniAuditor()
+GET           /grupnimailprocesnimenadzer                     @controllers.Emails.sendGroupEmailProcesniMenadzer()
+
 
 GET           /obrisicertifikat/:personCertId                 @controllers.PersonCertificates.deleteCertificate(personCertId: String)
 
@@ -104,3 +113,14 @@ GET           /file/:personId                                 @controllers.Files
 GET           /file/dodajfile/:personId                       @controllers.Files.saveFileRender(personId: Integer)
 POST          /file/:personId                                 @controllers.Files.saveFile(personId: Integer)
 GET           /filedelete/:personIdFilename                   @controllers.Files.deleteFile(personIdFilename: String)
+
+#SEMINARI
+GET           /seminari                                       @controllers.Seminars.seminarMain()
+GET           /kreirajseminar                                 @controllers.Seminars.createSeminarRender()
+POST          /kreirajseminar                                 @controllers.Seminars.createSeminar()
+GET           /obrisiseminar/:seminarId                       @controllers.Seminars.deleteSeminar(seminarId: Integer)
+DELETE        /obrisiseminar/:seminarId                       @controllers.Seminars.deleteSeminar(seminarId: Integer)
+GET           /listaseminara                                  @controllers.Seminars.listOfSeminars()
+GET           /osobesaseminara/:seminarId                     @controllers.Seminars.personsSeminarList(seminarId: Integer)
+GET           /azurirajseminar/:seminarId                     @controllers.Seminars.updateSeminarRender(seminarId: Integer)
+POST          /azurirajseminar/:seminarId                     @controllers.Seminars.updateSeminar(seminarId: Integer)

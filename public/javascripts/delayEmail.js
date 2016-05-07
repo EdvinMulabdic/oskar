@@ -6,8 +6,11 @@
 
 var now = new Date();
 console.log("NOW " + now)
-var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18,01, 0, 0);
-
+//var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18,01, 0, 0);
+var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0) - now;
+if (millisTill10 < 0) {
+    millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
+}
 $(document).ready(setInterval(function(){
 
     $.ajax({
@@ -16,12 +19,12 @@ $(document).ready(setInterval(function(){
     }).success(function(response) {
 
     });
-}, millisTill10.getTime()));
+    console.log("NOW " + now)
+}, millisTill10));
 
 
 
 function sendManualy(){
-    console.log("USAOOOOOOO")
     $.ajax({
         type: "POST",
         url: "/"

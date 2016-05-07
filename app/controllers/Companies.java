@@ -2,6 +2,7 @@ package controllers;
 
 import helpers.Authenticators;
 import models.Company;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -49,6 +50,7 @@ public class Companies extends Controller {
     @Security.Authenticated(Authenticators.AdminFilter.class)
     public Result listOfCompanies() {
         List<Company> companies = Company.getAllCompanies();
+//        Logger.info(companies + "kompanije");
         return ok(views.html.Companies.listOfCompanies.render(companies));
     }
 

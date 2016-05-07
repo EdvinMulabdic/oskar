@@ -1,0 +1,68 @@
+@(seminar: Seminar)
+@main {
+    <div id="content" class="span10">
+
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-bar-chart"></i>
+                <a href="@routes.AppUsers.panelRender()">Dashboard</a>
+                <i class="icon-angle-right"></i>
+                <a href="@routes.Seminars.seminarMain()">Seminari</a>
+                <i class="icon-angle-right"></i>
+                <a href="@routes.Seminars.listOfSeminars()">Lista seminara</a>
+                <i class="icon-angle-right"></i>
+                <a>Azuriraj seminar</a>
+            </li>
+        </ul>
+
+
+
+        <div class="box-content">
+            <form method="POST" class="form-horizontal" role="form" action="@routes.Seminars.updateSeminar(seminar.id)">
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="mark">Naziv seminara</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="name" name="name" value="@seminar.name" type="text" required>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="seminarDate">Datum </label>
+                        <div class="controls">
+                            <input type="date"  class="date-check" name="seminarDate" id="checkIn" value="@seminar.date" required/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="selectError1">Osobe </label>
+                        <div class="controls">
+                            <select id="multiple"  name="person" multiple data-rel="chosen" onclick="displayVals">
+                            @for(person <- seminar.persons) {
+                                <option selected value="@person.id">@person.name @person.lastName</option>
+                            }
+                                @for(person1 <- Person.getAllPersons) {
+                                    <option value="@person1.id">@person1.name @person1.lastName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Azuriraj</button>
+                    </div>
+                </fieldset>
+                <input type="text" id="personsId" name="personsId" style="display:none ">
+            </form>
+
+        </div>
+    </div>
+
+
+    <script src='@routes.Assets.versioned("javascripts/updatePersonId.js")'></script>
+    <script>
+         var multipleValues = $("#multiple").val() || [];
+    $("#personsId").val(multipleValues.join( "," ));
+    </script>
+
+}

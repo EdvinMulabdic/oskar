@@ -94,8 +94,7 @@ public class Certificate extends Model {
              /* ------------------- get number of certificates in database ------------------ */
 
     public static Integer getAllCertificatesSize() {
-        Integer numberOfCertificates= finder.all().size();
-        return numberOfCertificates;
+       return finder.findRowCount();
     }
 
             /* ------------------- finds certificate by id ------------------ */
@@ -153,6 +152,39 @@ public class Certificate extends Model {
 
     public static List<Person> mZZS() {
         List<CertificatePerson> certificatePerson = CertificatePerson.getPersonsByCertificateId(ManagerHelper.MZZS);
+        List<Person> persons = new ArrayList<>();
+
+        for (int i = 0; i < certificatePerson.size(); i++) {
+            Person person = Person.findPersonById(certificatePerson.get(i).personId);
+            persons.add(person);
+        }
+        return persons;
+    }
+
+    public static List<Person> auditor() {
+        List<CertificatePerson> certificatePerson = CertificatePerson.getPersonsByCertificateId(ManagerHelper.AUDITOR);
+        List<Person> persons = new ArrayList<>();
+
+        for (int i = 0; i < certificatePerson.size(); i++) {
+            Person person = Person.findPersonById(certificatePerson.get(i).personId);
+            persons.add(person);
+        }
+        return persons;
+    }
+
+    public static List<Person> interniAuditor() {
+        List<CertificatePerson> certificatePerson = CertificatePerson.getPersonsByCertificateId(ManagerHelper.IAUDITOR);
+        List<Person> persons = new ArrayList<>();
+
+        for (int i = 0; i < certificatePerson.size(); i++) {
+            Person person = Person.findPersonById(certificatePerson.get(i).personId);
+            persons.add(person);
+        }
+        return persons;
+    }
+
+    public static List<Person> procesniMenadzer() {
+        List<CertificatePerson> certificatePerson = CertificatePerson.getPersonsByCertificateId(ManagerHelper.PROCESNIMENADZER);
         List<Person> persons = new ArrayList<>();
 
         for (int i = 0; i < certificatePerson.size(); i++) {

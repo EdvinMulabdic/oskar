@@ -29,9 +29,11 @@
                 <p>Certifikati</p>
                 <span class="badge">@Certificate.getAllCertificatesSize</span>
             </a>
-            <a class="quick-button metro green span2" href="">
-                <i class="icon-file"></i>
-                <p>Izvjestaji</p>
+            <a class="quick-button metro green span2" href="@routes.Seminars.seminarMain()">
+                <i class="icon-group"></i>
+                <p>Seminari</p>
+                <span class="badge">@Seminar.getNumberOfSeminars</span>
+
             </a>
 
 

@@ -8,6 +8,11 @@ import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
 import play.Logger;
 
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.search.IntegerComparisonTerm;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -20,22 +25,52 @@ public class Email extends Model {
 
     public static void sendEmail(String emailTo, String subject, String mail){
 
-        SimpleEmail email = new SimpleEmail();
-        email.setHostName(ConfigProvider.SMTP_HOST);
-        email.setSmtpPort(Integer.parseInt(ConfigProvider.SMTP_PORT));
+//        SimpleEmail email = new SimpleEmail();
+//        email.setHostName(ConfigProvider.SMTP_HOST);
+//        email.setSmtpPort(Integer.parseInt(ConfigProvider.SMTP_PORT));
+//        try {
+//                /*Configuring mail*/
+//            email.setAuthentication(ConfigProvider.MAIL_FROM, ConfigProvider.MAIL_FROM_PASS);
+//            email.setFrom("edvin.mulabdic@outlook.com", "Edvin");
+//            email.setStartTLSEnabled(true);
+//            email.addTo(emailTo);
+//            email.setSubject(subject);
+//            email.setMsg(mail);
+//
+//
+//            email.send();
+//        } catch (EmailException e) {
+//            e.printStackTrace();
+//        }
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "587");
+        props.put("mail.smtp.socketFactory.class",
+                "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication("edvin.bh@gmail.com","ed01061989");
+                    }
+                });
+
         try {
-                /*Configuring mail*/
-            email.setAuthentication(ConfigProvider.MAIL_FROM, ConfigProvider.MAIL_FROM_PASS);
-            email.setFrom(ConfigProvider.MAIL_FROM);
-            email.setStartTLSEnabled(true);
-            email.addTo(emailTo);
-            email.setSubject(subject);
-            email.setMsg(mail);
 
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("edvin.mulabdic@outlook.com"));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(emailTo));
+            message.setSubject(subject);
+            message.setText(mail);
 
-            email.send();
-        } catch (EmailException e) {
-            e.printStackTrace();
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -48,7 +83,7 @@ public class Email extends Model {
         try {
                 /*Configuring mail*/
             multiPartEmail.setAuthentication(ConfigProvider.MAIL_FROM, ConfigProvider.MAIL_FROM_PASS);
-            multiPartEmail.setFrom(ConfigProvider.MAIL_FROM);
+            multiPartEmail.setFrom("edvin.mulabdic@outlook.com");
             multiPartEmail.setStartTLSEnabled(true);
 
             for(int i = 0; i < emailTo.size(); i++){
@@ -56,6 +91,7 @@ public class Email extends Model {
             }
             multiPartEmail.setSubject(subject);
             multiPartEmail.setMsg(mail);
+            multiPartEmail.addReplyTo("edvin.mulabdic@outlook.com");
 
 
 
@@ -73,6 +109,7 @@ public class Email extends Model {
         } catch (EmailException e) {
             e.printStackTrace();
         }
+
     }
 
     public static void sendGroupEmail(List<String> mailTo, String subject, String mail, List<String> filePath) {
@@ -220,14 +257,11 @@ public class Email extends Model {
         for (Integer key : personsCertificates.keySet()) {
             List<CertificatePerson> value = personsCertificates.get(key);
             for(int k = 0; k < value.size(); k++){
-                Logger.info("DATUM   " + formatter.format(value.get(k).expirationDate.getTime() - oneYear));
-                Logger.info("DATUM   " + formatter.format(value.get(k).expirationDate.getTime() - sixMonths));
 
                 if(formatter.format(value.get(k).expirationDate.getTime() - oneYear).equals(formatter.format(date)))  {
                     personsId.add(value.get(k).personId);
                     Email.sendEmailOneYear(personsId, value.get(k).certificateId);
                 }else if (formatter.format(value.get(k).expirationDate.getTime() - sixMonths ).equals(formatter.format(date))){
-                    Logger.info("DATUM   " + formatter.format(value.get(k).expirationDate.getTime() - sixMonths ));
                             personsId.add(value.get(k).personId);
                     Email.sendEmailSixMonths(personsId, value.get(k).certificateId);
                 }

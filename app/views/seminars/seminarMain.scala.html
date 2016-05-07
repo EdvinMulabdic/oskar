@@ -1,0 +1,27 @@
+@main{
+    <div id="content" class="span10">
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-bar-chart"></i>
+                <a href="@routes.AppUsers.panelRender()">Dashboard</a>
+                <i class="icon-angle-right"></i>
+                <a>Seminari</a>
+            </li>
+        </ul>
+
+        <div class="row-fluid margin-bottom">
+            <a class="quick-button metro greenLight span2 height" href="@routes.Seminars.createSeminar()">
+                <i class="icon-plus"></i>
+                <p>Dodaj seminar</p>
+            </a>
+
+            <a class="quick-button metro blue span2 height" href="@routes.Seminars.listOfSeminars()">
+                <i class="icon-list"></i>
+                <p>Lista Seminara</p>
+            </a>
+
+        </div>
+
+    </div>
+}

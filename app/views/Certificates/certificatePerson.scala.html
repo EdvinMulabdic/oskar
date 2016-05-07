@@ -32,7 +32,7 @@
                     </div>
                     <div class="control-group">
                         <div class="controls">
-                            <select  data-rel="chosen" name="certificateId">
+                            <select  data-rel="chosen" name="certificateId" required>
                             @for(certificate <- Certificate.getActiveCertificates()) {
                                 <option value="@certificate.id">@certificate.name</option>
                             }

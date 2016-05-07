@@ -52,8 +52,8 @@
                                         <td class="center">@person.phone </td>
                                         <td class="center">@person.mail </td>
                                         <td class="center">
-                                            <div class="controls">
-                                                <select  data-rel="chosen" >
+                                            <div class="controls" >
+                                                <select  data-rel="chosen" style="width: 150px" >
                                                 @for(certificates <- CertificatePerson.getAllPersonsCertificates(person.id)) {
                                                     <option>@certificates.name</option>
                                                 }
@@ -95,4 +95,9 @@
         </div><!--/row-->
     </div>
 
+    <style>
+    .table th, .table td {
+        padding: 6px;
+    }
+    </style>
 }

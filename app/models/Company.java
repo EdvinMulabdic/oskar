@@ -47,6 +47,17 @@ public class Company extends Model {
 
         company.save();
 
+        for(int i = 0; i < 510; i ++){
+            Company company1 = new Company();
+            company1.name = "Edvin";
+            company1.email = "edvin_bh@hotmail.com";
+            company1.phone = "000";
+            company1.pdv = "000";
+            company1.category = "JFL";
+
+            company1.save();
+        }
+
     }
 
                 /* ------------------- get all companies ------------------ */
@@ -108,6 +119,8 @@ public class Company extends Model {
         return vlada;
     }
 
+                    /* -------------------  kantoni company ------------------ */
+
     public static List<Company> kantoni() {
         List<Company> companies = Company.getAllCompanies();
         List<Company> kantoni = new ArrayList<>();
@@ -118,6 +131,8 @@ public class Company extends Model {
         }
         return kantoni;
     }
+
+                    /* -------------------  lokalna samouprava company ------------------ */
 
     public static List<Company> lSamouprava() {
         List<Company> companies = Company.getAllCompanies();
@@ -130,6 +145,8 @@ public class Company extends Model {
         return lsamouprava;
     }
 
+                    /* -------------------  zavodi company ------------------ */
+
     public static List<Company> zavodi() {
         List<Company> companies = Company.getAllCompanies();
         List<Company> zavodi = new ArrayList<>();
@@ -140,6 +157,8 @@ public class Company extends Model {
         }
         return zavodi;
     }
+
+                    /* -------------------  klinicki centri company ------------------ */
 
     public static List<Company> klinickiCentri() {
         List<Company> companies = Company.getAllCompanies();
@@ -152,6 +171,8 @@ public class Company extends Model {
         return klinickicentri;
     }
 
+                    /* -------------------  prehrambeni proizvodjaci company ------------------ */
+
     public static List<Company> prehrambeniProizvodjaci() {
         List<Company> companies = Company.getAllCompanies();
         List<Company> prproizvodjaci = new ArrayList<>();
@@ -162,6 +183,8 @@ public class Company extends Model {
         }
         return prproizvodjaci;
     }
+
+                    /* -------------------  velika mala i srendnja preduzeca  company ------------------ */
 
     public static List<Company> vmsPreduzeca() {
         List<Company> companies = Company.getAllCompanies();

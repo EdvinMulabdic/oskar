@@ -1,0 +1,58 @@
+@main {
+    <div id="content" class="span10">
+
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="icon-bar-chart"></i>
+                <a href="@routes.AppUsers.panelRender()">Dashboard</a>
+                <i class="icon-angle-right"></i>
+                <a href="@routes.Seminars.seminarMain()">Seminari</a>
+                <i class="icon-angle-right"></i>
+                <a>Dodaj seminar</a>
+            </li>
+        </ul>
+
+
+
+        <div class="box-content">
+            <form method="POST" class="form-horizontal" role="form" action="@routes.Seminars.createSeminar()">
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="mark">Naziv seminara</label>
+                        <div class="controls">
+                            <input class="input-xlarge focused" id="name" name="name" type="text" required>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="seminarDate">Datum </label>
+                        <div class="controls">
+                            <input type="date"  class="date-check" name="seminarDate" id="checkIn"  required/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="selectError1">Osobe </label>
+                        <div class="controls">
+                            <select id="multiple"  name="person" multiple data-rel="chosen">
+                                @for(person <- Person.getAllPersons()) {
+                                    <option value="@person.id">@person.name @person.lastName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Dodaj</button>
+                    </div>
+                </fieldset>
+                <input type="text" id="personsId" name="personsId" style="display: none">
+            </form>
+
+        </div>
+    </div>
+
+
+    <script src='@routes.Assets.versioned("javascripts/perosnsId.js")'></script>
+
+}

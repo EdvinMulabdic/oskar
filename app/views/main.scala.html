@@ -174,6 +174,8 @@
                                     <a class="dropmenu" href="#"><i class="icon-group"></i><span class="hidden-tablet">
                                         Osoblje</span> <span class="label label-important">@Person.getAllPersonsSize </span></a>
                                     <ul>
+                                        <li><a class="submenu" href="@routes.Persons.personsMain()"><i class="icon-certificate"></i><span class="hidden-tablet">
+                                            Osoblje Panel </span></a></li>
                                         <li><a class="submenu" href="@routes.Persons.createPersonRender()"><i class="icon-plus"></i><span class="hidden-tablet">
                                             Dodaj osobu </span></a></li>
                                         <li><a class="submenu" href="@routes.Persons.listOfPersons()"><i class="icon-list"></i><span class="hidden-tablet">
@@ -184,6 +186,8 @@
                                     <a class="dropmenu" href="#"><i class="icon-briefcase"></i><span class="hidden-tablet">
                                         Firme</span> <span class="label label-important">@Company.getAllCompaniesSize </span></a>
                                     <ul>
+                                        <li><a class="submenu" href="@routes.Companies.companyMain()"><i class="icon-certificate"></i><span class="hidden-tablet">
+                                            Firme Panel</span></a></li>
                                         <li><a class="submenu" href="@routes.Companies.createCompanyRender()"><i class="icon-plus"></i><span class="hidden-tablet">
                                             Dodaj firmu</span></a></li>
                                         <li><a class="submenu" href="@routes.Companies.listOfCompanies()"><i class="icon-list"></i><span class="hidden-tablet">
@@ -208,20 +212,27 @@
                                     <a class="dropmenu" href="#"><i class="icon-copy"></i><span class="hidden-tablet">
                                         Certifikati</span> <span class="label label-important">@Certificate.getAllCertificatesSize </span></a>
                                     <ul>
-                                        @*<li><a class="submenu" href="@routes.Certificates.createCertificateRender()"><i class="icon-plus"></i><span class="hidden-tablet">*@
-                                            @*Dodaj certifikat</span></a></li>*@
+                                        <li><a class="submenu" href="@routes.Certificates.certificateMain()"><i class="icon-certificate"></i><span class="hidden-tablet">
+                                            Certifikati Panel</span></a></li>
                                         <li><a class="submenu" href="@routes.Certificates.listOfActiveCertificates()"><i class="icon-list"></i><span class="hidden-tablet">
                                             Lista aktivnih certifikata</span></a></li>
                                         <li><a class="submenu" href="@routes.Certificates.listOfArchivedCertificates()"><i class="icon-list"></i><span class="hidden-tablet">
                                             Lista arhiviranih certifikata</span></a></li>
                                     </ul>
                                 </li>
+
                                 <li>
-                                    <a class="dropmenu" href="#"><i class="icon-file"></i><span class="hidden-tablet">
-                                        Izvjestaji</span></a>
-
+                                    <a class="dropmenu" href="#"><i class="icon-group"></i><span class="hidden-tablet">
+                                        Seminari</span> <span class="label label-important"> @Seminar.getNumberOfSeminars </span></a>
+                                    <ul>
+                                        <li><a class="submenu" href="@routes.Seminars.seminarMain()"><i class="icon-certificate"></i><span class="hidden-tablet">
+                                            Seminari Panel </span></a></li>
+                                        <li><a class="submenu" href="@routes.Seminars.createSeminar()"><i class="icon-plus"></i><span class="hidden-tablet">
+                                            Dodaj seminar </span></a></li>
+                                        <li><a class="submenu" href="@routes.Seminars.listOfSeminars()"><i class="icon-list"></i><span class="hidden-tablet">
+                                            Lista seminara </span></a></li>
+                                    </ul>
                                 </li>
-
 
                             </ul>
 

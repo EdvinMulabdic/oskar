@@ -1,0 +1,61 @@
+@import helpers.ConfigProvider
+
+@main {
+    <div id="content" class="span10">
+
+        <div class="row-fluid sortable">
+            <div class="box span12">
+                <div class="box-header" data-original-title>
+                    <h2><i class="halflings-icon white edit"></i><span class="break"></span>Posalji Email</h2>
+                </div>
+                <div class="box-content">
+                    <form method="POST" class="form-horizontal" role="form" enctype="multipart/form-data" action="@routes.Emails.sendGroupEmail()">
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label" for="typeahead">From: </label>
+                                <div class="controls">
+                                    <input type="text" class="span6 typeahead" id="mailFrom" name="mailFrom" data-provide="typeahead" value="@ConfigProvider.MAIL_FROM" readonly>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="typeahead">To: </label>
+                                <div class="controls">
+
+                                    <input type="text" class="span6 typeahead" id="mailTo" name="mailTo" data-provide="typeahead" value="@for(company <- Company.getAllCompanies()) {
+                                        @company.email
+                                    }" readonly>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="typeahead">Subject: </label>
+                                <div class="controls">
+                                    <input type="text" class="span6 typeahead" id="subject" name="subject" data-provide="typeahead" required>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="fileInput">File input</label>
+                                <div class="controls">
+                                    <input type="file" name="files" accept="application/pdf" class="form-control" multiple/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="email">Email </label>
+                                <div class="controls" id="email">
+                                    <textarea class="" id="emailTextArea" name="mail" rows="10" style="resize : vertical"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Posalji Mail</button>
+                            </div>
+                        </fieldset>
+                    </form>
+
+                </div>
+            </div><!--/span-->
+
+        </div><!--/row-->
+
+    </div>
+
+}

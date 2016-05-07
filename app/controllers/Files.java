@@ -25,7 +25,7 @@ public class Files extends Controller {
 
         List<File> results = new ArrayList<>();
 
-        String folderName = person.name + person.id;
+        String folderName = person.name + person.lastName+ person.id;
         String location = ConfigProvider.UPLOAD_FILES_FOLDER + folderName;
 
         File[] files = new File(location).listFiles();
@@ -33,8 +33,6 @@ public class Files extends Controller {
         if (files != null) {
             for (File file : files) {
                     results.add(file);
-                Logger.debug("ABSOLUTE PATH " + file.getAbsolutePath().replace('\\', '/'));
-
             }
         }
         return ok(views.html.Persons.listOfPersonsFiles.render(person, results));
@@ -59,7 +57,7 @@ public class Files extends Controller {
         Http.MultipartFormData body = request().body().asMultipartFormData();
         Http.MultipartFormData.FilePart filePart = body.getFile("files");
 
-        String folder = person.name + person.id;
+        String folder = person.name+ person.lastName + person.id;
 
         if (filePart != null) {
             String fileName = filePart.getFilename();
@@ -99,11 +97,10 @@ public class Files extends Controller {
         String fileName = personIdFileName.split("-")[1];
         Person person = Person.findPersonById(personId);
 
-        String folderName = person.name + person.id;
+        String folderName = person.name + person.lastName + person.id;
         String location = ConfigProvider.UPLOAD_FILES_FOLDER + folderName;
 
         File[] files = new File(location).listFiles();
-
         if (files != null) {
             for (File file : files) {
                 if(file.getName().equals(fileName)){
